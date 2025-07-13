@@ -1,179 +1,149 @@
 "use client"
 
-import { useState, useMemo, useCallback } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { questions10, questions20, questions50 } from "@/lib/questions"
 import { translations } from "@/lib/translations"
 
-export interface ColorScores {
-  red: number
-  yellow: number
-  green: number
-  blue: number
+export type Language = "en" | "es"
+export type QuizLength = "10" | "20" | "50"
+export type Color = "red" | "yellow" | "green" | "blue"
+
+interface Question {
+  id: number
+  question: string
+  options: {
+    text: string
+    color: Color
+  }[]
 }
 
-export type QuestionCount = 10 | 20 | 50
-export type Language = "en" | "ar" | "es"
+interface QuizState {
+  language: Language
+  quizLength: QuizLength | null
+  currentQuestionIndex: number
+  answers: Color[]
+  scores: Record<Color, number>
+  quizStarted: boolean
+  quizCompleted: boolean
+  t: (typeof translations)["en"] // Type for translation object
+  isRTL: boolean
+}
+
+// Utility function to shuffle an array
+function shuffleArray<T>(array: T[]): T[] {
+  const newArray = [...array]
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]]
+  }
+  return newArray
+}
 
 export function useQuiz() {
-  const [language, setLanguage] = useState<Language>("en")
-  const [questionCount, setQuestionCount] = useState<QuestionCount>(10)
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [answers, setAnswers] = useState<string[]>([])
-  const [showResults, setShowResults] = useState(false)
-  const [scores, setScores] = useState<ColorScores>({ red: 0, yellow: 0, green: 0, blue: 0 })
-  const [quizStarted, setQuizStarted] = useState(false)
+  const [state, setState] = useState<QuizState>({
+    language: "en",
+    quizLength: null,
+    currentQuestionIndex: 0,
+    answers: [],
+    scores: { red: 0, yellow: 0, green: 0, blue: 0 },
+    quizStarted: false,
+    quizCompleted: false,
+    t: translations["en"],
+    isRTL: false,
+  })
 
-  const t = useMemo(() => translations[language], [language])
-  const isRTL = language === "ar"
-
-  const currentQuestions = useMemo(() => {
-    switch (questionCount) {
-      case 10:
+  const getQuestions = useCallback(() => {
+    switch (state.quizLength) {
+      case "10":
         return questions10
-      case 20:
+      case "20":
         return questions20
-      case 50:
+      case "50":
         return questions50
       default:
-        return questions10
+        return []
     }
-  }, [questionCount])
+  }, [state.quizLength])
+
+  const allQuestions = getQuestions()
+  const currentQuestion = allQuestions[state.currentQuestionIndex]
+
+  // Shuffle options for the current question
+  const shuffledOptions = currentQuestion ? shuffleArray(currentQuestion.options) : []
+
+  useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      t: translations[prevState.language],
+      isRTL: prevState.language === "ar", // Example for RTL language
+    }))
+  }, [state.language])
+
+  const startQuiz = useCallback((length: QuizLength) => {
+    setState((prevState) => ({
+      ...prevState,
+      quizLength: length,
+      quizStarted: true,
+      currentQuestionIndex: 0,
+      answers: [],
+      scores: { red: 0, yellow: 0, green: 0, blue: 0 },
+      quizCompleted: false,
+    }))
+  }, [])
 
   const handleAnswer = useCallback(
-    (color: string) => {
-      const newAnswers = [...answers, color]
-      setAnswers(newAnswers)
+    (color: Color) => {
+      setState((prevState) => {
+        const newAnswers = [...prevState.answers, color]
+        const newScores = { ...prevState.scores, [color]: prevState.scores[color] + 1 }
 
-      if (currentQuestionIndex < currentQuestions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1)
-      } else {
-        calculateResults(newAnswers)
-      }
+        if (prevState.currentQuestionIndex < allQuestions.length - 1) {
+          return {
+            ...prevState,
+            answers: newAnswers,
+            scores: newScores,
+            currentQuestionIndex: prevState.currentQuestionIndex + 1,
+          }
+        } else {
+          // Quiz completed
+          return {
+            ...prevState,
+            answers: newAnswers,
+            scores: newScores,
+            quizCompleted: true,
+          }
+        }
+      })
     },
-    [answers, currentQuestionIndex, currentQuestions.length],
+    [allQuestions.length],
   )
 
-  const calculateResults = useCallback((allAnswers: string[]) => {
-    const newScores = { red: 0, yellow: 0, green: 0, blue: 0 } as ColorScores
-
-    allAnswers.forEach((answer) => {
-      newScores[answer as keyof ColorScores]++
-    })
-
-    setScores(newScores)
-    setShowResults(true)
-  }, [])
-
-  const getPercentages = useCallback(() => {
-    const total = Object.values(scores).reduce((sum, score) => sum + score, 0)
-    return {
-      red: Math.round((scores.red / total) * 100),
-      yellow: Math.round((scores.yellow / total) * 100),
-      green: Math.round((scores.green / total) * 100),
-      blue: Math.round((scores.blue / total) * 100),
-    }
-  }, [scores])
-
-  const getDominantColors = useCallback(() => {
-    const percentages = getPercentages()
-    const sortedColors = Object.entries(percentages)
-      .sort(([, a], [, b]) => b - a)
-      .map(([color]) => color as keyof typeof t.colorTraits)
-
-    return sortedColors
-  }, [getPercentages, t.colorTraits])
-
-  const getPersonalityAnalysis = useCallback(() => {
-    const dominantColors = getDominantColors()
-    const percentages = getPercentages()
-    const primary = dominantColors[0]
-    const secondary = dominantColors[1]
-
-    let analysis = t.personalityAnalysis.primary
-      .replace("{color}", t.colorTraits[primary].name)
-      .replace("{percentage}", percentages[primary].toString())
-      .replace("{traits}", t.colorTraits[primary].traits)
-
-    if (percentages[secondary] >= 20) {
-      analysis +=
-        " " +
-        t.personalityAnalysis.secondary
-          .replace("{color}", t.colorTraits[secondary].name)
-          .replace("{percentage}", percentages[secondary].toString())
-          .replace("{traits}", t.colorTraits[secondary].traits)
-    } else {
-      analysis += " " + t.personalityAnalysis.focused
-    }
-
-    return analysis
-  }, [getDominantColors, getPercentages, t.colorTraits, t.personalityAnalysis])
-
-  const handleDownloadData = useCallback(() => {
-    const percentages = getPercentages()
-    const dominantColors = getDominantColors()
-    const primaryColor = dominantColors[0]
-
-    let reportContent = `${t.results.title}\n`
-    reportContent += `${t.results.subtitle}\n\n`
-
-    reportContent += `${t.results.analysis}:\n`
-    reportContent += `${getPersonalityAnalysis()}\n\n`
-
-    reportContent += `${t.results.moreAboutColors}:\n`
-    Object.entries(t.colorTraits).forEach(([colorKey, info]) => {
-      const percentage = percentages[colorKey as keyof typeof percentages]
-      reportContent += `\n${info.emoji} ${info.name} (${percentage}%):\n`
-      reportContent += `${info.longDescription}\n`
-    })
-
-    reportContent += `\n${t.results.careers}:\n`
-    reportContent += `${t.results.careerIntro.replace("{color}", t.colorTraits[primaryColor].name)}\n`
-    t.careerSuggestions[primaryColor].forEach((career) => {
-      reportContent += `- ${career}\n`
-    })
-
-    const blob = new Blob([reportContent], { type: "text/plain;charset=utf-8" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `color_personality_analysis_${new Date().toISOString().split("T")[0]}.txt`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }, [getPercentages, getDominantColors, getPersonalityAnalysis, t])
-
   const resetQuiz = useCallback(() => {
-    setCurrentQuestionIndex(0)
-    setAnswers([])
-    setShowResults(false)
-    setScores({ red: 0, yellow: 0, green: 0, blue: 0 })
-    setQuizStarted(false)
+    setState((prevState) => ({
+      ...prevState,
+      quizLength: null,
+      currentQuestionIndex: 0,
+      answers: [],
+      scores: { red: 0, yellow: 0, green: 0, blue: 0 },
+      quizStarted: false,
+      quizCompleted: false,
+    }))
   }, [])
 
-  const startQuiz = useCallback(() => {
-    setQuizStarted(true)
+  const setLanguage = useCallback((lang: Language) => {
+    setState((prevState) => ({
+      ...prevState,
+      language: lang,
+    }))
   }, [])
 
   return {
-    language,
-    setLanguage,
-    questionCount,
-    setQuestionCount,
-    currentQuestionIndex,
-    answers,
-    showResults,
-    scores,
-    quizStarted,
-    t,
-    isRTL,
-    currentQuestions,
-    handleAnswer,
-    getPercentages,
-    getDominantColors,
-    getPersonalityAnalysis,
-    handleDownloadData,
-    resetQuiz,
+    ...state,
+    currentQuestion: currentQuestion ? { ...currentQuestion, options: shuffledOptions } : undefined,
+    totalQuestions: allQuestions.length,
     startQuiz,
+    handleAnswer,
+    resetQuiz,
+    setLanguage,
   }
 }

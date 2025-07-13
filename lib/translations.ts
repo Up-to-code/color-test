@@ -1,129 +1,55 @@
-interface ColorTrait {
-  name: string
-  emoji: string
-  traits: string
-  shortTrait: string
-  longDescription: string
-}
-
-interface Translations {
-  title: string
-  subtitle: string
-  selectLanguage: string
-  selectQuestionCount: string
-  questionCounts: {
-    quick: string
-    standard: string
-    detailed: string
-  }
-  questions: string
-  startQuiz: string
-  question: string
-  of: string
-  complete: string
-  retakeQuiz: string
-  downloadData: string
-  colorTraits: {
-    red: ColorTrait
-    yellow: ColorTrait
-    green: ColorTrait
-    blue: ColorTrait
-  }
-  results: {
-    title: string
-    subtitle: string
-    analysis: string
-    careers: string
-    careerIntro: string
-    moreAboutColors: string
-  }
-  personalityAnalysis: {
-    primary: string
-    secondary: string
-    focused: string
-  }
-  careerSuggestions: {
-    red: string[]
-    yellow: string[]
-    green: string[]
-    blue: string[]
-  }
-  questionsData: string[] | { question: string; options: string[] }[]
-}
-
-export const translations: Record<"en" | "ar" | "es", Translations> = {
+export const translations = {
   en: {
     title: "Color Personality Quiz",
-    subtitle: "Discover your personality through colors! Answer questions to reveal your unique blend.",
-    selectLanguage: "Select Language",
-    selectQuestionCount: "Choose Quiz Length",
-    questionCounts: {
-      quick: "Quick Test",
-      standard: "Standard Test",
-      detailed: "Detailed Test",
-    },
-    questions: "questions",
+    subtitle: "Discover your dominant personality traits based on color psychology.",
     startQuiz: "Start Quiz",
-    question: "Question",
+    selectLanguage: "Select Language",
+    selectQuizLength: "Select Quiz Length",
+    questions: "Questions",
     of: "of",
     complete: "Complete",
-    retakeQuiz: "Take Quiz Again",
-    downloadData: "Download Results",
+    results: "Your Results",
+    dominantColor: "Your dominant color is",
+    analysis: "Analysis",
+    careerSuggestions: "Career Suggestions",
+    retakeQuiz: "Retake Quiz",
     colorTraits: {
       red: {
         name: "Red",
-        emoji: "🔴",
-        traits: "Assertive, decisive, stubborn, leader",
-        shortTrait: "Leader",
-        longDescription:
-          "The Red personality is characterized by leadership, determination, and ambition. You are direct, love to be in control, and strive to achieve goals quickly and efficiently. You might be stubborn at times, but this reflects your persistence for success. You are born to lead and make tough decisions.",
+        emoji: "❤️",
+        shortTrait: "Driven & Bold",
+        description:
+          "You are a natural leader, highly driven, and assertive. You thrive on challenges and are not afraid to take risks. Your energy is contagious, and you often inspire others to action. You are competitive and focused on achieving your goals.",
+        career: "CEO, Entrepreneur, Sales Manager, Attorney, Athlete, Military Leader",
       },
       yellow: {
         name: "Yellow",
-        emoji: "🟡",
-        traits: "Playful, optimistic, spontaneous, emotional",
-        shortTrait: "Optimist",
-        longDescription:
-          "The Yellow personality is characterized by playfulness, optimism, and spontaneity. You are social, love the spotlight, and enjoy new experiences. You might be emotional and impulsive, but your positive energy is contagious. You bring joy and inspiration to those around you.",
+        emoji: "💛",
+        shortTrait: "Optimistic & Creative",
+        description:
+          "You are optimistic, cheerful, and highly creative. You love new ideas, social interactions, and bringing joy to others. You are adaptable and enjoy being the center of attention. You are often the life of the party and bring a positive vibe to any situation.",
+        career: "Marketing Specialist, Event Planner, Artist, Public Relations, Teacher, Entertainer",
       },
       green: {
         name: "Green",
-        emoji: "🟢",
-        traits: "Peaceful, empathetic, listener, flexible",
-        shortTrait: "Peacemaker",
-        longDescription:
-          "The Green personality is characterized by peace, empathy, and flexibility. You are calm, love harmony, and seek to help others. You might be hesitant in making big decisions, but you are an excellent listener and a strong supporter. You build bridges of trust and understanding.",
+        emoji: "💚",
+        shortTrait: "Harmonious & Supportive",
+        description:
+          "You are calm, empathetic, and value harmony. You are a great listener and a supportive friend, always putting others' needs before your own. You seek stability and prefer a peaceful environment. You are reliable and build strong, lasting relationships.",
+        career: "Therapist, Counselor, Human Resources, Nurse, Social Worker, Customer Service",
       },
       blue: {
         name: "Blue",
-        emoji: "🔵",
-        traits: "Analytical, organized, logical, detail-oriented",
-        shortTrait: "Analyst",
-        longDescription:
-          "The Blue personality is characterized by analysis, organization, and logic. You are precise, love facts, and seek deep understanding of everything. You might be a perfectionist and overthink, but your accuracy and methodology are invaluable. You strive for perfection and bring clarity.",
+        emoji: "💙",
+        shortTrait: "Analytical & Precise",
+        description:
+          "You are analytical, logical, and detail-oriented. You value accuracy and precision, often seeking to understand the underlying principles of things. You are a deep thinker and prefer to work independently, focusing on facts and data. You are thorough and systematic in your approach.",
+        career: "Software Engineer, Data Analyst, Scientist, Accountant, Architect, Researcher",
       },
-    },
-    results: {
-      title: "Your Color Personality Results",
-      subtitle: "Discover your unique personality blend!",
-      analysis: "Your Personality Analysis",
-      careers: "Career Suggestions",
-      careerIntro: "Based on your {color} personality, these careers might be a great fit:",
-      moreAboutColors: "More About Your Colors",
-    },
-    personalityAnalysis: {
-      primary: "You're primarily a {color} personality ({percentage}%), which means you're {traits}.",
-      secondary: "Your secondary {color} traits ({percentage}%) add {traits} to your personality blend.",
-      focused: "You have a strong, focused personality type with clear preferences and consistent behavior patterns.",
-    },
-    careerSuggestions: {
-      red: ["CEO/Executive", "Sales Manager", "Entrepreneur", "Project Manager", "Military Officer"],
-      yellow: ["Marketing Specialist", "Event Planner", "Teacher", "Social Media Manager", "Artist"],
-      green: ["Counselor", "HR Specialist", "Social Worker", "Nurse", "Mediator"],
-      blue: ["Data Analyst", "Engineer", "Accountant", "Researcher", "Software Developer"],
     },
     questionsData: [
       {
+        id: 1,
         question: "How do you react when someone strongly disagrees with your opinion?",
         options: [
           "I defend my stance until the end.",
@@ -133,6 +59,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 2,
         question: "How do you usually approach new tasks?",
         options: [
           "I jump in immediately and take charge.",
@@ -142,10 +69,12 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 3,
         question: "How would your friends describe you?",
         options: ["Direct and determined.", "Fun and energetic.", "Calm and kind.", "Smart and structured."],
       },
       {
+        id: 4,
         question: "What's your decision-making style?",
         options: [
           "Fast and confident.",
@@ -155,6 +84,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 5,
         question: "How do you handle criticism?",
         options: [
           "I push back and argue.",
@@ -164,6 +94,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 6,
         question: "In a group project, what's your usual role?",
         options: [
           "Leader and decision-maker.",
@@ -173,6 +104,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 7,
         question: "How do you spend your free time?",
         options: [
           "Competing in games or challenges.",
@@ -182,6 +114,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 8,
         question: "What's your reaction to sudden change?",
         options: [
           "I take control and adapt fast.",
@@ -191,6 +124,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 9,
         question: "When under stress, how do you act?",
         options: [
           "I become impatient and controlling.",
@@ -200,6 +134,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 10,
         question: "What motivates you the most?",
         options: [
           "Winning and achieving.",
@@ -209,6 +144,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 11,
         question: "How do you prefer to communicate?",
         options: [
           "Direct and to the point.",
@@ -218,6 +154,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 12,
         question: "What's your ideal work environment?",
         options: [
           "Fast-paced and competitive.",
@@ -227,6 +164,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 13,
         question: "How do you handle deadlines?",
         options: [
           "I work best under pressure.",
@@ -236,6 +174,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 14,
         question: "What's your learning style?",
         options: [
           "Learning by doing and leading.",
@@ -245,6 +184,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 15,
         question: "How do you handle conflict?",
         options: [
           "Face it head-on.",
@@ -254,6 +194,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 16,
         question: "What drives your decisions?",
         options: [
           "Results and efficiency.",
@@ -263,6 +204,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 17,
         question: "How do you recharge after a long day?",
         options: [
           "Physical activity or competition.",
@@ -272,6 +214,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 18,
         question: "What's your approach to risk?",
         options: [
           "Take calculated risks for big rewards.",
@@ -281,6 +224,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 19,
         question: "How do you show appreciation?",
         options: [
           "Through achievements and results.",
@@ -290,6 +234,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 20,
         question: "What's your ideal vacation?",
         options: [
           "Adventure sports or challenging activities.",
@@ -299,6 +244,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 21,
         question: "How do you handle interruptions?",
         options: [
           "I get frustrated and redirect quickly.",
@@ -308,6 +254,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 22,
         question: "What's your meeting style?",
         options: [
           "Keep it short and action-focused.",
@@ -317,6 +264,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 23,
         question: "How do you give feedback?",
         options: [
           "Direct and focused on results.",
@@ -326,6 +274,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 24,
         question: "What motivates your team participation?",
         options: [
           "Leading and driving results.",
@@ -335,6 +284,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 25,
         question: "How do you handle routine tasks?",
         options: [
           "Find ways to do them faster.",
@@ -344,6 +294,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 26,
         question: "What's your networking approach?",
         options: [
           "Strategic and goal-oriented.",
@@ -353,6 +304,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 27,
         question: "How do you handle mistakes?",
         options: [
           "Fix them quickly and move on.",
@@ -362,6 +314,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 28,
         question: "What's your presentation style?",
         options: [
           "Confident and persuasive.",
@@ -371,6 +324,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 29,
         question: "How do you prioritize tasks?",
         options: [
           "By impact and urgency.",
@@ -380,6 +334,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 30,
         question: "What's your problem-solving approach?",
         options: [
           "Take charge and implement solutions.",
@@ -389,6 +344,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 31,
         question: "How do you handle success?",
         options: [
           "Set bigger goals immediately.",
@@ -398,6 +354,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 32,
         question: "What's your email communication style?",
         options: [
           "Brief and action-oriented.",
@@ -407,6 +364,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 33,
         question: "How do you handle information overload?",
         options: [
           "Focus on what's most important.",
@@ -416,6 +374,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 34,
         question: "What's your leadership philosophy?",
         options: [
           "Lead by example and results.",
@@ -425,6 +384,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 35,
         question: "How do you handle technology changes?",
         options: [
           "Adopt quickly if it improves efficiency.",
@@ -434,6 +394,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 36,
         question: "What's your time management style?",
         options: [
           "Packed schedule with clear priorities.",
@@ -443,6 +404,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 37,
         question: "How do you handle customer complaints?",
         options: [
           "Resolve quickly and efficiently.",
@@ -452,6 +414,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 38,
         question: "What's your approach to innovation?",
         options: [
           "Implement proven improvements.",
@@ -461,6 +424,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 39,
         question: "How do you handle team disagreements?",
         options: [
           "Make the final decision quickly.",
@@ -470,6 +434,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 40,
         question: "What's your work-life balance approach?",
         options: [
           "Work hard, play hard.",
@@ -479,6 +444,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 41,
         question: "How do you handle budget constraints?",
         options: [
           "Find ways to do more with less.",
@@ -488,6 +454,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 42,
         question: "What's your delegation style?",
         options: [
           "Clear expectations and deadlines.",
@@ -497,6 +464,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 43,
         question: "How do you handle performance reviews?",
         options: [
           "Focus on results and goals.",
@@ -506,6 +474,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 44,
         question: "What's your crisis management approach?",
         options: [
           "Take immediate decisive action.",
@@ -515,6 +484,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 45,
         question: "How do you handle workplace politics?",
         options: [
           "Navigate strategically to achieve goals.",
@@ -524,6 +494,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 46,
         question: "What's your training and development preference?",
         options: [
           "Skills that drive immediate results.",
@@ -533,6 +504,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 47,
         question: "How do you handle client relationships?",
         options: [
           "Focus on delivering value quickly.",
@@ -542,6 +514,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 48,
         question: "What's your approach to quality control?",
         options: [
           "Efficient processes that ensure results.",
@@ -551,6 +524,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 49,
         question: "How do you handle remote work?",
         options: [
           "Stay focused on deliverables.",
@@ -560,454 +534,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
-        question: "What's your long-term career vision?",
-        options: [
-          "Achieve leadership and influence.",
-          "Make a positive impact on others.",
-          "Build meaningful relationships and stability.",
-          "Become an expert in my field.",
-        ],
-      },
-    ],
-  },
-  ar: {
-    title: "اختبار الشخصية بالألوان",
-    subtitle: "اكتشف شخصيتك من خلال الألوان! أجب على الأسئلة لتكشف مزيجك الفريد.",
-    selectLanguage: "اختر اللغة",
-    selectQuestionCount: "اختر طول الاختبار",
-    questionCounts: {
-      quick: "اختبار سريع",
-      standard: "اختبار عادي",
-      detailed: "اختبار مفصل",
-    },
-    questions: "أسئلة",
-    startQuiz: "ابدأ الاختبار",
-    question: "السؤال",
-    of: "من",
-    complete: "مكتمل",
-    retakeQuiz: "أعد الاختبار",
-    downloadData: "تنزيل النتائج",
-    colorTraits: {
-      red: {
-        name: "الأحمر",
-        emoji: "🔴",
-        traits: "حازم، حاسم، عنيد، قائد",
-        shortTrait: "القائد",
-        longDescription:
-          "الشخصية الحمراء تتميز بالقيادة، العزيمة، والطموح. أنت شخص مباشر، تحب التحكم، وتسعى لتحقيق الأهداف بسرعة وكفاءة. قد تكون عنيداً في بعض الأحيان، ولكن هذا يعكس إصرارك على النجاح. أنت مولود لتكون قائداً وتتخذ القرارات الصعبة.",
-      },
-      yellow: {
-        name: "الأصفر",
-        emoji: "🟡",
-        traits: "مرح، متفائل، عفوي، عاطفي",
-        shortTrait: "المتفائل",
-        longDescription:
-          "الشخصية الصفراء تتميز بالمرح، التفاؤل، والعفوية. أنت شخص اجتماعي، تحب الأضواء، وتستمتع بالتجارب الجديدة. قد تكون عاطفياً ومندفعاً، ولكن طاقتك الإيجابية معدية. أنت تجلب البهجة والإلهام لمن حولك.",
-      },
-      green: {
-        name: "الأخضر",
-        emoji: "🟢",
-        traits: "مسالم، متعاطف، مستمع، مرن",
-        shortTrait: "صانع السلام",
-        longDescription:
-          "الشخصية الخضراء تتميز بالسلام، التعاطف، والمرونة. أنت شخص هادئ، تحب الانسجام، وتسعى لمساعدة الآخرين. قد تكون متردداً في اتخاذ القرارات الكبيرة، ولكنك مستمع ممتاز وداعم قوي. أنت تبني جسوراً من الثقة والتفاهم.",
-      },
-      blue: {
-        name: "الأزرق",
-        emoji: "🔵",
-        traits: "تحليلي، منظم، منطقي، دقيق التفاصيل",
-        shortTrait: "المحلل",
-        longDescription:
-          "الشخصية الزرقاء تتميز بالتحليل، التنظيم، والمنطق. أنت شخص دقيق، تحب الحقائق، وتسعى للفهم العميق لكل شيء. قد تكون مثالياً وتفرط في التفكير، ولكن دقتك ومنهجيتك لا تقدر بثمن. أنت تسعى للكمال وتجلب الوضوح.",
-      },
-    },
-    results: {
-      title: "نتائج شخصيتك بالألوان",
-      subtitle: "اكتشف مزيج شخصيتك الفريد!",
-      analysis: "تحليل شخصيتك",
-      careers: "اقتراحات المهن",
-      careerIntro: "بناءً على شخصيتك {color}، قد تناسبك هذه المهن:",
-      moreAboutColors: "المزيد عن ألوانك",
-    },
-    personalityAnalysis: {
-      primary: "أنت في المقام الأول شخصية {color} ({percentage}%)، مما يعني أنك {traits}.",
-      secondary: "سماتك الثانوية {color} ({percentage}%) تضيف {traits} إلى مزيج شخصيتك.",
-      focused: "لديك نوع شخصية قوي ومركز مع تفضيلات واضحة وأنماط سلوك ثابتة.",
-    },
-    careerSuggestions: {
-      red: ["الرئيس التنفيذي", "مدير المبيعات", "رائد أعمال", "مدير مشروع", "ضابط عسكري"],
-      yellow: ["أخصائي تسويق", "منظم فعاليات", "معلم", "مدير وسائل التواصل", "فنان"],
-      green: ["مستشار", "أخصائي موارد بشرية", "أخصائي اجتماعي", "ممرض", "وسيط"],
-      blue: ["محلل بيانات", "مهندس", "محاسب", "باحث", "مطور برمجيات"],
-    },
-    questionsData: [
-      {
-        question: "كيف تتفاعل عندما يختلف شخص بقوة مع رأيك؟",
-        options: [
-          "أدافع عن موقفي حتى النهاية.",
-          "أغير الموضوع لتجنب التوتر.",
-          "أستمع وأحاول إيجاد أرضية مشتركة.",
-          "أحلل المنطق في كلا الجانبين قبل الرد.",
-        ],
-      },
-      {
-        question: "كيف تتعامل عادة مع المهام الجديدة؟",
-        options: [
-          "أقفز فوراً وأتولى القيادة.",
-          "أتحمس وأحب التجريب.",
-          "أنتظر شخصاً ليرشدني ويساعدني.",
-          "أخطط لكل شيء بعناية قبل البدء.",
-        ],
-      },
-      {
-        question: "كيف يصفك أصدقاؤك؟",
-        options: ["مباشر ومصمم.", "ممتع ونشيط.", "هادئ ولطيف.", "ذكي ومنظم."],
-      },
-      {
-        question: "ما هو أسلوبك في اتخاذ القرارات؟",
-        options: ["سريع وواثق.", "بناءً على مزاجي وحدسي.", "بعد استشارة الآخرين.", "من خلال التفكير العميق والتحليل."],
-      },
-      {
-        question: "كيف تتعامل مع النقد؟",
-        options: ["أقاوم وأجادل.", "أضحك عليه أو أغير الموضوع.", "أمتصه بصمت وأتأمل.", "أحلل التعليقات منطقياً."],
-      },
-      {
-        question: "في مشروع جماعي، ما هو دورك المعتاد؟",
-        options: ["القائد وصانع القرار.", "مولد الأفكار والمحفز.", "زميل داعم ومستمع.", "المخطط والمنظم."],
-      },
-      {
-        question: "كيف تقضي وقت فراغك؟",
-        options: [
-          "أتنافس في الألعاب أو التحديات.",
-          "أتسكع أو أجرب شيئاً جديداً.",
-          "أسترخي مع العائلة أو الأصدقاء المقربين.",
-          "أقرأ أو أبحث أو أنظم.",
-        ],
-      },
-      {
-        question: "ما هو رد فعلك على التغيير المفاجئ؟",
-        options: [
-          "أتولى السيطرة وأتكيف بسرعة.",
-          "أتحمس - أحب المفاجآت!",
-          "أفضل الاستقرار وأشعر بالقلق.",
-          "أحتاج لدراسة التغيير أولاً.",
-        ],
-      },
-      {
-        question: "عندما تكون تحت الضغط، كيف تتصرف؟",
-        options: [
-          "أصبح نفاد الصبر ومسيطراً.",
-          "أحاول إلهاء نفسي بالمرح.",
-          "أتجنب الصراع وأصمت.",
-          "أفرط في التفكير وأنسحب للداخل.",
-        ],
-      },
-      {
-        question: "ما الذي يحفزك أكثر؟",
-        options: ["الفوز والإنجاز.", "الإثارة والاستمتاع.", "الانسجام والتقدير.", "الفهم والوضوح."],
-      },
-      {
-        question: "كيف تفضل التواصل؟",
-        options: ["مباشر ومختصر.", "متحمس ومعبر.", "لطيف ومراعٍ.", "دقيق وواقعي."],
-      },
-      {
-        question: "ما هي بيئة العمل المثالية بالنسبة لك؟",
-        options: ["سريعة الوتيرة وتنافسية.", "إبداعية وتعاونية.", "داعمة ومتناغمة.", "هادئة ومنظمة."],
-      },
-      {
-        question: "كيف تتعامل مع المواعيد النهائية؟",
-        options: [
-          "أعمل بشكل أفضل تحت الضغط.",
-          "أشعر بالنشاط من الاندفاع.",
-          "أفضل التقدم المطرد.",
-          "أخطط مسبقاً لتجنب التوتر.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في التعلم؟",
-        options: ["التعلم بالممارسة والقيادة.", "تفاعلي وعملي.", "تعاوني وداعم.", "بحث ودراسة منهجية."],
-      },
-      {
-        question: "كيف تتعامل مع النزاعات؟",
-        options: ["أواجهها مباشرة.", "أحاول تخفيف الأجواء.", "أسعى للحلول الوسط والتفاهم.", "أحلل السبب الجذري."],
-      },
-      {
-        question: "ما الذي يدفع قراراتك؟",
-        options: ["النتائج والكفاءة.", "الشغف والإلهام.", "القيم والعلاقات.", "المنطق والبيانات."],
-      },
-      {
-        question: "كيف تستعيد طاقتك بعد يوم طويل؟",
-        options: [
-          "النشاط البدني أو المنافسة.",
-          "التواصل الاجتماعي أو الترفيه.",
-          "وقت هادئ مع الأحباء.",
-          "القراءة أو الأنشطة الفردية.",
-        ],
-      },
-      {
-        question: "ما هو نهجك تجاه المخاطر؟",
-        options: [
-          "أخاطر بمخاطر محسوبة لتحقيق مكافآت كبيرة.",
-          "أحتضن عدم اليقين كمغامرة.",
-          "أفضل السلامة والاستقرار.",
-          "أحلل بدقة قبل اتخاذ القرار.",
-        ],
-      },
-      {
-        question: "كيف تظهر تقديرك؟",
-        options: [
-          "من خلال الإنجازات والنتائج.",
-          "بحماس واحتفال.",
-          "من خلال الإيماءات الشخصية والرعاية.",
-          "بأفعال مدروسة وذات مغزى.",
-        ],
-      },
-      {
-        question: "ما هي عطلتك المثالية؟",
-        options: [
-          "رياضات المغامرة أو الأنشطة الصعبة.",
-          "التجمعات الاجتماعية والتجارب الجديدة.",
-          "الاسترخاء الهادئ مع العائلة.",
-          "الاستكشاف الثقافي والتعلم.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع الانقطاعات؟",
-        options: [
-          "أشعر بالإحباط وأعيد التوجيه بسرعة.",
-          "أرحب بالاستراحة وأتحدث.",
-          "أستمع بلطف وأساعد إذا لزم الأمر.",
-          "أفضل إنهاء مهمتي الحالية أولاً.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في الاجتماعات؟",
-        options: [
-          "اجعلها قصيرة ومركزة على الإجراءات.",
-          "شجع العصف الذهني والأفكار.",
-          "تأكد من أن للجميع صوتاً.",
-          "اتبع جدول الأعمال ووثق القرارات.",
-        ],
-      },
-      {
-        question: "كيف تقدم الملاحظات؟",
-        options: ["مباشرة ومركزة على النتائج.", "إيجابية ومشجعة.", "لطيفة وداعمة.", "محددة وبناءة."],
-      },
-      {
-        question: "ما الذي يحفز مشاركتك في الفريق؟",
-        options: [
-          "القيادة وتحقيق النتائج.",
-          "إلهام الآخرين وتنشيطهم.",
-          "دعم ومساعدة الزملاء.",
-          "المساهمة بالخبرة والتحليل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع المهام الروتينية؟",
-        options: [
-          "أجد طرقاً لإنجازها بشكل أسرع.",
-          "أجعلها ممتعة أو أفوضها.",
-          "أقوم بها بثبات وموثوقية.",
-          "أقوم بتنظيمها وتحسينها بشكل منهجي.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في بناء العلاقات؟",
-        options: [
-          "استراتيجي وموجه نحو الهدف.",
-          "طبيعي ومركز على العلاقات.",
-          "أصيل وبناء للثقة.",
-          "مهني ومشارك للمعرفة.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع الأخطاء؟",
-        options: [
-          "أصلحها بسرعة وأمضي قدماً.",
-          "أتعلم منها وأظل إيجابياً.",
-          "أتأمل فيها وأطلب الدعم.",
-          "أحللها لمنع تكرارها.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في العرض التقديمي؟",
-        options: ["واثق ومقنع.", "جذاب وتفاعلي.", "دافئ وشامل.", "مفصل وغني بالمعلومات."],
-      },
-      {
-        question: "كيف تحدد أولويات المهام؟",
-        options: [
-          "حسب التأثير والإلحاح.",
-          "حسب الاهتمام ومستوى الطاقة.",
-          "حسب احتياجات الآخرين والمواعيد النهائية.",
-          "حسب التسلسل المنطقي والأهمية.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في حل المشكلات؟",
-        options: [
-          "أتولى المسؤولية وأنفذ الحلول.",
-          "أعصف ذهنياً ببدائل إبداعية.",
-          "أسعى للحصول على المدخلات وبناء التوافق.",
-          "أبحث وأحلل بشكل منهجي.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع النجاح؟",
-        options: ["أضع أهدافاً أكبر على الفور.", "أحتفل وأشارك الفرحة.", "أشكر من ساعدني.", "أحلل ما نجح بشكل جيد."],
-      },
-      {
-        question: "ما هو أسلوبك في التواصل عبر البريد الإلكتروني؟",
-        options: ["مختصر وموجه نحو الإجراءات.", "ودود ومعبر.", "مهذب ومراعٍ.", "واضح ومفصل."],
-      },
-      {
-        question: "كيف تتعامل مع الحمل الزائد للمعلومات؟",
-        options: [
-          "أركز على الأهم.",
-          "أتصفح بحثاً عن النقاط البارزة المثيرة للاهتمام.",
-          "أعالجها ببطء وبعناية.",
-          "أنظمها وأصنفها بشكل منهجي.",
-        ],
-      },
-      {
-        question: "ما هي فلسفتك في القيادة؟",
-        options: [
-          "القيادة بالقدوة والنتائج.",
-          "إلهام وتحفيز الآخرين.",
-          "خدمة ودعم الفريق.",
-          "التوجيه بالمعرفة والهيكل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع التغيرات التكنولوجية؟",
-        options: [
-          "أتبناها بسرعة إذا كانت تحسن الكفاءة.",
-          "أستكشفها بحماس.",
-          "أنتظر الآخرين لاختبارها أولاً.",
-          "أبحث بدقة قبل التبني.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في إدارة الوقت؟",
-        options: [
-          "جدول زمني مزدحم بأولويات واضحة.",
-          "مرن مع مساحة للعفوية.",
-          "متوازن مع وقت للعلاقات.",
-          "منظم مع تخطيط مفصل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع شكاوى العملاء؟",
-        options: [
-          "أحلها بسرعة وكفاءة.",
-          "أستمع بتعاطف وأطمئن.",
-          "أفهم مشاعرهم وأعتذر.",
-          "أبحث في الحقائق وأقدم الحلول.",
-        ],
-      },
-      {
-        question: "ما هو نهجك تجاه الابتكار؟",
-        options: [
-          "تطبيق التحسينات المثبتة.",
-          "التجريب بأفكار إبداعية.",
-          "البناء على الأساليب الناجحة الموجودة.",
-          "البحث والاختبار بشكل منهجي.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع خلافات الفريق؟",
-        options: [
-          "أتخذ القرار النهائي بسرعة.",
-          "أجد حلولاً وسط إبداعية.",
-          "أسهل النقاش حتى التوافق.",
-          "أقدم الحقائق لتوجيه القرار.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في التوازن بين العمل والحياة؟",
-        options: [
-          "أعمل بجد، ألعب بجد.",
-          "أدمج المرح في كل شيء.",
-          "أحافظ على الانسجام بين الاثنين.",
-          "أخطط وأجدول كلاهما بعناية.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع قيود الميزانية؟",
-        options: ["أجد طرقاً لإنجاز المزيد بأقل.", "أكون مبدعاً في البدائل.", "أقبل القيود بلطف.", "أحلل وأحسن الإنفاق."],
-      },
-      {
-        question: "ما هو أسلوبك في التفويض؟",
-        options: [
-          "توقعات واضحة ومواعيد نهائية.",
-          "تشجيع الإبداع والملكية.",
-          "تقديم الدعم والمتابعة.",
-          "تعليمات مفصلة ومراحل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع مراجعات الأداء؟",
-        options: [
-          "التركيز على النتائج والأهداف.",
-          "الاحتفال بالإنجازات بحماس.",
-          "مناقشة النمو والتطوير.",
-          "تقديم ملاحظات مفصلة ومقاييس.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في إدارة الأزمات؟",
-        options: [
-          "اتخاذ إجراءات حاسمة فورية.",
-          "البقاء إيجابياً وحشد الفريق.",
-          "دعم المتضررين أولاً.",
-          "تقييم الوضع وتخطيط الاستجابة.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع سياسات مكان العمل؟",
-        options: [
-          "التنقل استراتيجياً لتحقيق الأهداف.",
-          "بناء العلاقات والبقاء إيجابياً.",
-          "تجنب الصراع والبقاء محايداً.",
-          "مراقبة وفهم الديناميكيات.",
-        ],
-      },
-      {
-        question: "ما هو تفضيلك للتدريب والتطوير؟",
-        options: [
-          "المهارات التي تحقق نتائج فورية.",
-          "البرامج التفاعلية والجذابة.",
-          "بيئات التعلم التعاوني.",
-          "Cursos completos y estructurados.",
-        ],
-      },
-      {
-        question: "How do you handle client relationships?",
-        options: [
-          "Focus on delivering value quickly.",
-          "Build rapport and trust.",
-          "Understand their needs deeply.",
-          "Provide expert advice and solutions.",
-        ],
-      },
-      {
-        question: "What's your approach to quality control?",
-        options: [
-          "Efficient processes that ensure results.",
-          "Encourage pride and ownership.",
-          "Collaborative review and improvement.",
-          "Systematic testing and documentation.",
-        ],
-      },
-      {
-        question: "How do you handle remote work?",
-        options: [
-          "Stay focused on deliverables.",
-          "Maintain social connections virtually.",
-          "Create comfortable home environment.",
-          "Establish structured routines.",
-        ],
-      },
-      {
+        id: 50,
         question: "What's your long-term career vision?",
         options: [
           "Achieve leadership and influence.",
@@ -1020,172 +547,150 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
   },
   es: {
     title: "Test de Personalidad por Colores",
-    subtitle: "¡Descubre tu personalidad a través de los colores! Responde preguntas para revelar tu mezcla única.",
+    subtitle: "Descubre tus rasgos de personalidad dominantes basados en la psicología del color.",
+    startQuiz: "Empezar Test",
     selectLanguage: "Seleccionar Idioma",
-    selectQuestionCount: "Elegir Duración del Test",
-    questionCounts: {
-      quick: "Test Rápido",
-      standard: "Test Estándar",
-      detailed: "Test Detallado",
-    },
-    questions: "preguntas",
-    startQuiz: "Comenzar Test",
-    question: "Pregunta",
+    selectQuizLength: "Seleccionar Duración del Test",
+    questions: "Preguntas",
     of: "de",
-    complete: "Completo",
+    complete: "Completado",
+    results: "Tus Resultados",
+    dominantColor: "Tu color dominante es",
+    analysis: "Análisis",
+    careerSuggestions: "Sugerencias de Carrera",
     retakeQuiz: "Repetir Test",
-    downloadData: "Descargar Resultados",
     colorTraits: {
       red: {
         name: "Rojo",
-        emoji: "🔴",
-        traits: "Asertivo, decisivo, terco, líder",
-        shortTrait: "Líder",
-        longDescription:
-          "La personalidad Roja se caracteriza por el liderazgo, la determinación y la ambición. Eres directo, te encanta tener el control y te esfuerzas por lograr tus objetivos de forma rápida y eficiente. A veces puedes ser terco, pero esto refleja tu persistencia para el éxito. Naciste para liderar y tomar decisiones difíciles.",
+        emoji: "❤️",
+        shortTrait: "Impulsivo y Audaz",
+        description:
+          "Eres un líder nato, muy impulsivo y asertivo. Te encantan los desafíos y no temes tomar riesgos. Tu energía es contagiosa y a menudo inspiras a otros a la acción. Eres competitivo y te enfocas en lograr tus metas.",
+        career: "CEO, Emprendedor, Gerente de Ventas, Abogado, Atleta, Líder Militar",
       },
       yellow: {
         name: "Amarillo",
-        emoji: "🟡",
-        traits: "Juguetón, optimista, espontáneo, emocional",
-        shortTrait: "Optimista",
-        longDescription:
-          "La personalidad Amarilla se caracteriza por la alegría, el optimismo y la espontaneidad. Eres sociable, te encanta ser el centro de atención y disfrutas de nuevas experiencias. Puedes ser emocional e impulsivo, pero tu energía positiva es contagiosa. Traes alegría e inspiración a quienes te rodean.",
+        emoji: "💛",
+        shortTrait: "Optimista y Creativo",
+        description:
+          "Eres optimista, alegre y muy creativo. Te encantan las nuevas ideas, las interacciones sociales y alegrar a los demás. Eres adaptable y disfrutas ser el centro de atención. A menudo eres el alma de la fiesta y aportas una vibra positiva a cualquier situación.",
+        career: "Especialista en Marketing, Organizador de Eventos, Artista, Relaciones Públicas, Maestro, Animador",
       },
       green: {
         name: "Verde",
-        emoji: "🟢",
-        traits: "Pacífico, empático, oyente, flexible",
-        shortTrait: "Pacificador",
-        longDescription:
-          "La personalidad Verde se caracteriza por la paz, la empatía y la flexibilidad. Eres tranquilo, amas la armonía y buscas ayudar a los demás. Puedes dudar al tomar grandes decisiones, pero eres un excelente oyente y un gran apoyo. Construyes puentes de confianza y comprensión.",
+        emoji: "💚",
+        shortTrait: "Armonioso y Solidario",
+        description:
+          "Eres tranquilo, empático y valoras la armonía. Eres un gran oyente y un amigo solidario, siempre poniendo las necesidades de los demás antes que las tuyas. Buscas estabilidad y prefieres un ambiente pacífico. Eres confiable y construyes relaciones fuertes y duraderas.",
+        career: "Terapeuta, Consejero, Recursos Humanos, Enfermero, Trabajador Social, Servicio al Cliente",
       },
       blue: {
         name: "Azul",
-        emoji: "🔵",
-        traits: "Analítico, organizado, lógico, detallista",
-        shortTrait: "Analista",
-        longDescription:
-          "La personalidad Azul se caracteriza por el análisis, la organización y la lógica. Eres preciso, te encantan los hechos y buscas una comprensión profunda de todo. Puedes ser perfeccionista y pensar demasiado, pero tu precisión y metodología son invaluables. Buscas la perfección y aportas claridad.",
+        emoji: "💙",
+        shortTrait: "Analítico y Preciso",
+        description:
+          "Eres analítico, lógico y orientado a los detalles. Valoras la exactitud y la precisión, a menudo buscando comprender los principios subyacentes de las cosas. Eres un pensador profundo y prefieres trabajar de forma independiente, centrándote en hechos y datos. Eres minucioso y sistemático en tu enfoque.",
+        career: "Ingeniero de Software, Analista de Datos, Científico, Contador, Arquitecto, Investigador",
       },
-    },
-    results: {
-      title: "Tus Resultados de Personalidad por Colores",
-      subtitle: "¡Descubre tu mezcla única de personalidad!",
-      analysis: "Tu Análisis de Personalidad",
-      careers: "Sugerencias de Carrera",
-      careerIntro: "Basado en tu personalidad {color}, estas carreras podrían ser perfectas:",
-      moreAboutColors: "Más sobre tus colores",
-    },
-    personalityAnalysis: {
-      primary: "Eres principalmente una personalidad {color} ({percentage}%), lo que significa que eres {traits}.",
-      secondary: "Tus rasgos secundarios {color} ({percentage}%) añaden {traits} a tu mezcla de personalidad.",
-      focused:
-        "Tienes un tipo de personalidad fuerte y enfocado con preferencias claras y patrones de comportamiento consistentes.",
-    },
-    careerSuggestions: {
-      red: ["CEO/Ejecutivo", "Gerente de Ventas", "Emprendedor", "Gerente de Proyecto", "Oficial Militar"],
-      yellow: [
-        "Especialista en Marketing",
-        "Organizador de Eventos",
-        "Maestro",
-        "Gerente de Redes Sociales",
-        "Artista",
-      ],
-      green: ["Consejero", "Especialista en RRHH", "Trabajador Social", "Enfermero", "Mediador"],
-      blue: ["Analista de Datos", "Ingeniero", "Contador", "Investigador", "Desarrollador de Software"],
     },
     questionsData: [
       {
-        question: "¿Cómo reaccionas cuando alguien está fuertemente en desacuerdo con tu opinión?",
+        id: 1,
+        question: "¿Cómo reaccionas cuando alguien está en desacuerdo con tu opinión?",
         options: [
           "Defiendo mi postura hasta el final.",
-          "Cambio el tema para evitar tensión.",
-          "Escucho y trato de encontrar puntos en común.",
+          "Cambio de tema para evitar tensiones.",
+          "Escucho e intento encontrar puntos en común.",
           "Analizo la lógica de ambos lados antes de responder.",
         ],
       },
       {
+        id: 2,
         question: "¿Cómo sueles abordar nuevas tareas?",
         options: [
-          "Salto inmediatamente y tomo el control.",
+          "Me lanzo de inmediato y tomo el control.",
           "Me emociono y me gusta experimentar.",
-          "Espero a que alguien me guíe y ayude.",
-          "Planeo todo cuidadosamente antes de empezar.",
+          "Espero a que alguien me guíe y me ayude.",
+          "Planifico todo cuidadosamente antes de empezar.",
         ],
       },
       {
+        id: 3,
         question: "¿Cómo te describirían tus amigos?",
-        options: [
-          "Directo y determinado.",
-          "Divertido y enérgico.",
-          "Tranquilo y amable.",
-          "Inteligente y estructurado.",
-        ],
+        options: ["Directo y decidido.", "Divertido y enérgico.", "Tranquilo y amable.", "Inteligente y estructurado."],
       },
       {
-        question: "¿Cuál es tu estilo para tomar decisiones?",
+        id: 4,
+        question: "¿Cuál es tu estilo de toma de decisiones?",
         options: [
-          "Rápido y confiado.",
+          "Rápido y seguro.",
           "Basado en mi estado de ánimo e intuición.",
           "Después de consultar a otros.",
-          "A través de pensamiento profundo y análisis.",
+          "A través de una profunda reflexión y análisis.",
         ],
       },
       {
+        id: 5,
         question: "¿Cómo manejas las críticas?",
         options: [
-          "Me resisto y discuto.",
-          "Me río o cambio el tema.",
-          "Lo absorbo silenciosamente y reflexiono.",
-          "Analizo los comentarios lógicamente.",
+          "Me defiendo y discuto.",
+          "Me lo tomo a broma o cambio de tema.",
+          "Lo asimilo en silencio y reflexiono.",
+          "Analizo la retroalimentación lógicamente.",
         ],
       },
       {
-        question: "En un proyecto grupal, ¿cuál es tu rol usual?",
+        id: 6,
+        question: "En un proyecto grupal, ¿cuál es tu rol habitual?",
         options: [
           "Líder y tomador de decisiones.",
           "Generador de ideas y motivador.",
-          "Compañero de apoyo y oyente.",
+          "Compañero de equipo solidario y oyente.",
           "Planificador y organizador.",
         ],
       },
       {
+        id: 7,
         question: "¿Cómo pasas tu tiempo libre?",
         options: [
           "Compitiendo en juegos o desafíos.",
-          "Pasando el rato o probando algo nuevo.",
-          "Relajándome con familia o amigos cercanos.",
+          "Saliendo o probando algo nuevo.",
+          "Relajándome con la familia o amigos cercanos.",
           "Leyendo, investigando u organizando.",
         ],
       },
       {
-        question: "¿Cuál es tu reacción al cambio repentino?",
+        id: 8,
+        question: "¿Cuál es tu reacción ante un cambio repentino?",
         options: [
-          "Tomo control y me adapto rápido.",
-          "Me emociono - ¡amo las sorpresas!",
-          "Prefiero estabilidad y me siento inquieto.",
+          "Tomo el control y me adapto rápido.",
+          "Me emociono, ¡me encantan las sorpresas!",
+          "Prefiero la estabilidad y me siento incómodo.",
           "Necesito estudiar el cambio primero.",
         ],
       },
       {
+        id: 9,
         question: "Cuando estás bajo estrés, ¿cómo actúas?",
         options: [
           "Me vuelvo impaciente y controlador.",
-          "Trato de distraerme con diversión.",
-          "Evito el conflicto y me quedo callado.",
-          "Pienso demasiado y me retiro hacia adentro.",
+          "Intento distraerme con diversión.",
+          "Evito el conflicto y me quedo en silencio.",
+          "Pienso demasiado y me retraigo.",
         ],
       },
       {
+        id: 10,
         question: "¿Qué te motiva más?",
-        options: ["Ganar y lograr.", "Emoción y disfrute.", "Armonía y apreciación.", "Entendimiento y claridad."],
+        options: ["Ganar y lograr.", "Emoción y disfrute.", "Armonía y aprecio.", "Comprensión y claridad."],
       },
       {
+        id: 11,
         question: "¿Cómo prefieres comunicarte?",
         options: ["Directo y al grano.", "Entusiasta y expresivo.", "Amable y considerado.", "Preciso y factual."],
       },
       {
+        id: 12,
         question: "¿Cuál es tu entorno de trabajo ideal?",
         options: [
           "De ritmo rápido y competitivo.",
@@ -1195,6 +700,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 13,
         question: "¿Cómo manejas los plazos?",
         options: [
           "Trabajo mejor bajo presión.",
@@ -1204,6 +710,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 14,
         question: "¿Cuál es tu estilo de aprendizaje?",
         options: [
           "Aprender haciendo y liderando.",
@@ -1213,37 +720,42 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 15,
         question: "¿Cómo manejas los conflictos?",
         options: [
-          "Lo enfrento directamente.",
+          "Los enfrento directamente.",
           "Intento aligerar el ambiente.",
           "Busco el compromiso y la comprensión.",
           "Analizo la causa raíz.",
         ],
       },
       {
+        id: 16,
         question: "¿Qué impulsa tus decisiones?",
         options: ["Resultados y eficiencia.", "Pasión e inspiración.", "Valores y relaciones.", "Lógica y datos."],
       },
       {
+        id: 17,
         question: "¿Cómo te recargas después de un largo día?",
         options: [
           "Actividad física o competición.",
-          "Socializar o entretenimiento.",
+          "Socializando o entreteniéndome.",
           "Tiempo tranquilo con seres queridos.",
-          "Leer o actividades solitarias.",
+          "Leyendo o actividades solitarias.",
         ],
       },
       {
+        id: 18,
         question: "¿Cuál es tu enfoque ante el riesgo?",
         options: [
-          "Asumo riesgos calculados para grandes recompensas.",
+          "Tomo riesgos calculados para grandes recompensas.",
           "Abrazo la incertidumbre como una aventura.",
           "Prefiero la seguridad y la estabilidad.",
           "Analizo a fondo antes de decidir.",
         ],
       },
       {
+        id: 19,
         question: "¿Cómo muestras aprecio?",
         options: [
           "A través de logros y resultados.",
@@ -1253,6 +765,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 20,
         question: "¿Cuál es tu vacación ideal?",
         options: [
           "Deportes de aventura o actividades desafiantes.",
@@ -1262,6 +775,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 21,
         question: "¿Cómo manejas las interrupciones?",
         options: [
           "Me frustro y redirijo rápidamente.",
@@ -1271,15 +785,17 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 22,
         question: "¿Cuál es tu estilo de reunión?",
         options: [
-          "Que sea breve y centrada en la acción.",
+          "Breve y centrado en la acción.",
           "Fomentar la lluvia de ideas y las ideas.",
           "Asegurarse de que todos tengan voz.",
           "Seguir la agenda y documentar las decisiones.",
         ],
       },
       {
+        id: 23,
         question: "¿Cómo das retroalimentación?",
         options: [
           "Directa y centrada en los resultados.",
@@ -1289,6 +805,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 24,
         question: "¿Qué motiva tu participación en el equipo?",
         options: [
           "Liderar e impulsar resultados.",
@@ -1298,6 +815,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 25,
         question: "¿Cómo manejas las tareas rutinarias?",
         options: [
           "Encuentro formas de hacerlas más rápido.",
@@ -1307,6 +825,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 26,
         question: "¿Cuál es tu enfoque de networking?",
         options: [
           "Estratégico y orientado a objetivos.",
@@ -1316,6 +835,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 27,
         question: "¿Cómo manejas los errores?",
         options: [
           "Los corrijo rápidamente y sigo adelante.",
@@ -1325,6 +845,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 28,
         question: "¿Cuál es tu estilo de presentación?",
         options: [
           "Seguro y persuasivo.",
@@ -1334,6 +855,7 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 29,
         question: "¿Cómo priorizas las tareas?",
         options: [
           "Por impacto y urgencia.",
@@ -1343,15 +865,17 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
-        question: "¿Cuál es tu enfoque para la resolución de problemas?",
+        id: 30,
+        question: "¿Cuál es tu enfoque para resolver problemas?",
         options: [
-          "Tomo el control e implemento soluciones.",
-          "Hago una lluvia de ideas de alternativas creativas.",
-          "Busco aportes y construyo consenso.",
-          "Investigo y analizo sistemáticamente.",
+          "Tomar el control e implementar soluciones.",
+          "Generar ideas creativas alternativas.",
+          "Buscar aportes y construir consenso.",
+          "Investigar y analizar sistemáticamente.",
         ],
       },
       {
+        id: 31,
         question: "¿Cómo manejas el éxito?",
         options: [
           "Establezco metas más grandes inmediatamente.",
@@ -1361,24 +885,27 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
+        id: 32,
         question: "¿Cuál es tu estilo de comunicación por correo electrónico?",
         options: [
-          "Breve y orientada a la acción.",
-          "Amigable y expresiva.",
-          "Educada y considerada.",
-          "Clara y detallada.",
+          "Breve y orientado a la acción.",
+          "Amigable y expresivo.",
+          "Educado y considerado.",
+          "Claro y detallado.",
         ],
       },
       {
+        id: 33,
         question: "¿Cómo manejas la sobrecarga de información?",
         options: [
           "Me concentro en lo más importante.",
-          "Busco los puntos destacados interesantes.",
+          "Busco los puntos más interesantes.",
           "Lo proceso lenta y cuidadosamente.",
-          "Lo organizo y clasifico sistemáticamente.",
+          "Lo organizo y categorizo sistemáticamente.",
         ],
       },
       {
+        id: 34,
         question: "¿Cuál es tu filosofía de liderazgo?",
         options: [
           "Liderar con el ejemplo y los resultados.",
@@ -1388,1110 +915,163 @@ export const translations: Record<"en" | "ar" | "es", Translations> = {
         ],
       },
       {
-        question: "How do you handle technology changes?",
+        id: 35,
+        question: "¿Cómo manejas los cambios tecnológicos?",
         options: [
-          "Adopt quickly if it improves efficiency.",
-          "Explore enthusiastically.",
-          "Wait for others to test it first.",
-          "Research thoroughly before adopting.",
+          "Adopto rápidamente si mejora la eficiencia.",
+          "Exploro con entusiasmo.",
+          "Espero a que otros lo prueben primero.",
+          "Investigo a fondo antes de adoptar.",
         ],
       },
       {
-        question: "What's your time management style?",
+        id: 36,
+        question: "¿Cuál es tu estilo de gestión del tiempo?",
         options: [
-          "Packed schedule with clear priorities.",
-          "Flexible with room for spontaneity.",
-          "Balanced with time for relationships.",
-          "Structured with detailed planning.",
+          "Horario apretado con prioridades claras.",
+          "Flexible con espacio para la espontaneidad.",
+          "Equilibrado con tiempo para las relaciones.",
+          "Estructurado con planificación detallada.",
         ],
       },
       {
-        question: "How do you handle customer complaints?",
+        id: 37,
+        question: "¿Cómo manejas las quejas de los clientes?",
         options: [
-          "Resolve quickly and efficiently.",
-          "Listen empathetically and reassure.",
-          "Understand their feelings and apologize.",
-          "Investigate facts and provide solutions.",
+          "Resuelvo rápida y eficientemente.",
+          "Escucho con empatía y tranquilizo.",
+          "Comprendo sus sentimientos y me disculpo.",
+          "Investigo los hechos y ofrezco soluciones.",
         ],
       },
       {
-        question: "What's your approach to innovation?",
+        id: 38,
+        question: "¿Cuál es tu enfoque de la innovación?",
         options: [
-          "Implement proven improvements.",
-          "Experiment with creative ideas.",
-          "Build on existing successful methods.",
-          "Research and test systematically.",
+          "Implemento mejoras probadas.",
+          "Experimento con ideas creativas.",
+          "Me baso en métodos exitosos existentes.",
+          "Investigo y pruebo sistemáticamente.",
         ],
       },
       {
-        question: "How do you handle team disagreements?",
+        id: 39,
+        question: "¿Cómo manejas los desacuerdos en el equipo?",
         options: [
-          "Make the final decision quickly.",
-          "Find creative compromises.",
-          "Facilitate discussion until consensus.",
-          "Present facts to guide decision.",
+          "Tomo la decisión final rápidamente.",
+          "Encuentro compromisos creativos.",
+          "Facilito la discusión hasta el consenso.",
+          "Presento hechos para guiar la decisión.",
         ],
       },
       {
-        question: "What's your work-life balance approach?",
+        id: 40,
+        question: "¿Cuál es tu enfoque del equilibrio entre vida laboral y personal?",
         options: [
-          "Work hard, play hard.",
-          "Integrate fun into everything.",
-          "Maintain harmony between both.",
-          "Plan and schedule both carefully.",
+          "Trabajar duro, divertirse mucho.",
+          "Integrar la diversión en todo.",
+          "Mantener la armonía entre ambos.",
+          "Planificar y programar ambos cuidadosamente.",
         ],
       },
       {
-        question: "How do you handle budget constraints?",
+        id: 41,
+        question: "¿Cómo manejas las restricciones presupuestarias?",
         options: [
-          "Find ways to do more with less.",
-          "Get creative with alternatives.",
-          "Accept limitations gracefully.",
-          "Analyze and optimize spending.",
-        ],
-      },
-      {
-        question: "What's your delegation style?",
-        options: [
-          "Clear expectations and deadlines.",
-          "Encourage creativity and ownership.",
-          "Provide support and check-ins.",
-          "Detailed instructions and milestones.",
-        ],
-      },
-      {
-        question: "How do you handle performance reviews?",
-        options: [
-          "Focus on results and goals.",
-          "Celebrate achievements enthusiastically.",
-          "Discuss growth and development.",
-          "Provide detailed feedback and metrics.",
-        ],
-      },
-      {
-        question: "What's your crisis management approach?",
-        options: [
-          "Take immediate decisive action.",
-          "Stay positive and rally the team.",
-          "Support affected people first.",
-          "Assess situation and plan response.",
-        ],
-      },
-      {
-        question: "How do you handle workplace politics?",
-        options: [
-          "Navigate strategically to achieve goals.",
-          "Build relationships and stay positive.",
-          "Avoid conflict and stay neutral.",
-          "Observe and understand the dynamics.",
-        ],
-      },
-      {
-        question: "What's your training and development preference?",
-        options: [
-          "Skills that drive immediate results.",
-          "Interactive and engaging programs.",
-          "Collaborative learning environments.",
-          "Comprehensive and structured courses.",
-        ],
-      },
-      {
-        question: "How do you handle client relationships?",
-        options: [
-          "Focus on delivering value quickly.",
-          "Build rapport and trust.",
-          "Understand their needs deeply.",
-          "Provide expert advice and solutions.",
-        ],
-      },
-      {
-        question: "What's your approach to quality control?",
-        options: [
-          "Efficient processes that ensure results.",
-          "Encourage pride and ownership.",
-          "Collaborative review and improvement.",
-          "Systematic testing and documentation.",
-        ],
-      },
-      {
-        question: "How do you handle remote work?",
-        options: [
-          "Stay focused on deliverables.",
-          "Maintain social connections virtually.",
-          "Create comfortable home environment.",
-          "Establish structured routines.",
-        ],
-      },
-      {
-        question: "What's your long-term career vision?",
-        options: [
-          "Achieve leadership and influence.",
-          "Make a positive impact on others.",
-          "Build meaningful relationships and stability.",
-          "Become an expert in my field.",
-        ],
-      },
-    ],
-  },
-  ar: {
-    title: "اختبار الشخصية بالألوان",
-    subtitle: "اكتشف شخصيتك من خلال الألوان! أجب على الأسئلة لتكشف مزيجك الفريد.",
-    selectLanguage: "اختر اللغة",
-    selectQuestionCount: "اختر طول الاختبار",
-    questionCounts: {
-      quick: "اختبار سريع",
-      standard: "اختبار عادي",
-      detailed: "اختبار مفصل",
-    },
-    questions: "أسئلة",
-    startQuiz: "ابدأ الاختبار",
-    question: "السؤال",
-    of: "من",
-    complete: "مكتمل",
-    retakeQuiz: "أعد الاختبار",
-    downloadData: "تنزيل النتائج",
-    colorTraits: {
-      red: {
-        name: "الأحمر",
-        emoji: "🔴",
-        traits: "حازم، حاسم، عنيد، قائد",
-        shortTrait: "القائد",
-        longDescription:
-          "الشخصية الحمراء تتميز بالقيادة، العزيمة، والطموح. أنت شخص مباشر، تحب التحكم، وتسعى لتحقيق الأهداف بسرعة وكفاءة. قد تكون عنيداً في بعض الأحيان، ولكن هذا يعكس إصرارك على النجاح. أنت مولود لتكون قائداً وتتخذ القرارات الصعبة.",
-      },
-      yellow: {
-        name: "الأصفر",
-        emoji: "🟡",
-        traits: "مرح، متفائل، عفوي، عاطفي",
-        shortTrait: "المتفائل",
-        longDescription:
-          "الشخصية الصفراء تتميز بالمرح، التفاؤل، والعفوية. أنت شخص اجتماعي، تحب الأضواء، وتستمتع بالتجارب الجديدة. قد تكون عاطفياً ومندفعاً، ولكن طاقتك الإيجابية معدية. أنت تجلب البهجة والإلهام لمن حولك.",
-      },
-      green: {
-        name: "الأخضر",
-        emoji: "🟢",
-        traits: "مسالم، متعاطف، مستمع، مرن",
-        shortTrait: "صانع السلام",
-        longDescription:
-          "الشخصية الخضراء تتميز بالسلام، التعاطف، والمرونة. أنت شخص هادئ، تحب الانسجام، وتسعى لمساعدة الآخرين. قد تكون متردداً في اتخاذ القرارات الكبيرة، ولكنك مستمع ممتاز وداعم قوي. أنت تبني جسوراً من الثقة والتفاهم.",
-      },
-      blue: {
-        name: "الأزرق",
-        emoji: "🔵",
-        traits: "تحليلي، منظم، منطقي، دقيق التفاصيل",
-        shortTrait: "المحلل",
-        longDescription:
-          "الشخصية الزرقاء تتميز بالتحليل، التنظيم، والمنطق. أنت شخص دقيق، تحب الحقائق، وتسعى للفهم العميق لكل شيء. قد تكون مثالياً وتفرط في التفكير، ولكن دقتك ومنهجيتك لا تقدر بثمن. أنت تسعى للكمال وتجلب الوضوح.",
-      },
-    },
-    results: {
-      title: "نتائج شخصيتك بالألوان",
-      subtitle: "اكتشف مزيج شخصيتك الفريد!",
-      analysis: "تحليل شخصيتك",
-      careers: "اقتراحات المهن",
-      careerIntro: "بناءً على شخصيتك {color}، قد تناسبك هذه المهن:",
-      moreAboutColors: "المزيد عن ألوانك",
-    },
-    personalityAnalysis: {
-      primary: "أنت في المقام الأول شخصية {color} ({percentage}%)، مما يعني أنك {traits}.",
-      secondary: "سماتك الثانوية {color} ({percentage}%) تضيف {traits} إلى مزيج شخصيتك.",
-      focused: "لديك نوع شخصية قوي ومركز مع تفضيلات واضحة وأنماط سلوك ثابتة.",
-    },
-    careerSuggestions: {
-      red: ["الرئيس التنفيذي", "مدير المبيعات", "رائد أعمال", "مدير مشروع", "ضابط عسكري"],
-      yellow: ["أخصائي تسويق", "منظم فعاليات", "معلم", "مدير وسائل التواصل", "فنان"],
-      green: ["مستشار", "أخصائي موارد بشرية", "أخصائي اجتماعي", "ممرض", "وسيط"],
-      blue: ["محلل بيانات", "مهندس", "محاسب", "باحث", "مطور برمجيات"],
-    },
-    questionsData: [
-      {
-        question: "كيف تتفاعل عندما يختلف شخص بقوة مع رأيك؟",
-        options: [
-          "أدافع عن موقفي حتى النهاية.",
-          "أغير الموضوع لتجنب التوتر.",
-          "أستمع وأحاول إيجاد أرضية مشتركة.",
-          "أحلل المنطق في كلا الجانبين قبل الرد.",
-        ],
-      },
-      {
-        question: "كيف تتعامل عادة مع المهام الجديدة؟",
-        options: [
-          "أقفز فوراً وأتولى القيادة.",
-          "أتحمس وأحب التجريب.",
-          "أنتظر شخصاً ليرشدني ويساعدني.",
-          "أخطط لكل شيء بعناية قبل البدء.",
-        ],
-      },
-      {
-        question: "كيف يصفك أصدقاؤك؟",
-        options: ["مباشر ومصمم.", "ممتع ونشيط.", "هادئ ولطيف.", "ذكي ومنظم."],
-      },
-      {
-        question: "ما هو أسلوبك في اتخاذ القرارات؟",
-        options: ["سريع وواثق.", "بناءً على مزاجي وحدسي.", "بعد استشارة الآخرين.", "من خلال التفكير العميق والتحليل."],
-      },
-      {
-        question: "كيف تتعامل مع النقد؟",
-        options: ["أقاوم وأجادل.", "أضحك عليه أو أغير الموضوع.", "أمتصه بصمت وأتأمل.", "أحلل التعليقات منطقياً."],
-      },
-      {
-        question: "في مشروع جماعي، ما هو دورك المعتاد؟",
-        options: ["القائد وصانع القرار.", "مولد الأفكار والمحفز.", "زميل داعم ومستمع.", "المخطط والمنظم."],
-      },
-      {
-        question: "كيف تقضي وقت فراغك؟",
-        options: [
-          "أتنافس في الألعاب أو التحديات.",
-          "أتسكع أو أجرب شيئاً جديداً.",
-          "أسترخي مع العائلة أو الأصدقاء المقربين.",
-          "أقرأ أو أبحث أو أنظم.",
-        ],
-      },
-      {
-        question: "ما هو رد فعلك على التغيير المفاجئ؟",
-        options: [
-          "أتولى السيطرة وأتكيف بسرعة.",
-          "أتحمس - أحب المفاجآت!",
-          "أفضل الاستقرار وأشعر بالقلق.",
-          "أحتاج لدراسة التغيير أولاً.",
-        ],
-      },
-      {
-        question: "عندما تكون تحت الضغط، كيف تتصرف؟",
-        options: [
-          "أصبح نفاد الصبر ومسيطراً.",
-          "أحاول إلهاء نفسي بالمرح.",
-          "أتجنب الصراع وأصمت.",
-          "أفرط في التفكير وأنسحب للداخل.",
-        ],
-      },
-      {
-        question: "ما الذي يحفزك أكثر؟",
-        options: ["الفوز والإنجاز.", "الإثارة والاستمتاع.", "الانسجام والتقدير.", "الفهم والوضوح."],
-      },
-      {
-        question: "كيف تفضل التواصل؟",
-        options: ["مباشر ومختصر.", "متحمس ومعبر.", "لطيف ومراعٍ.", "دقيق وواقعي."],
-      },
-      {
-        question: "ما هي بيئة العمل المثالية بالنسبة لك؟",
-        options: ["سريعة الوتيرة وتنافسية.", "إبداعية وتعاونية.", "داعمة ومتناغمة.", "هادئة ومنظمة."],
-      },
-      {
-        question: "كيف تتعامل مع المواعيد النهائية؟",
-        options: [
-          "أعمل بشكل أفضل تحت الضغط.",
-          "أشعر بالنشاط من الاندفاع.",
-          "أفضل التقدم المطرد.",
-          "أخطط مسبقاً لتجنب التوتر.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في التعلم؟",
-        options: ["التعلم بالممارسة والقيادة.", "تفاعلي وعملي.", "تعاوني وداعم.", "بحث ودراسة منهجية."],
-      },
-      {
-        question: "كيف تتعامل مع النزاعات؟",
-        options: ["أواجهها مباشرة.", "أحاول تخفيف الأجواء.", "أسعى للحلول الوسط والتفاهم.", "أحلل السبب الجذري."],
-      },
-      {
-        question: "ما الذي يدفع قراراتك؟",
-        options: ["النتائج والكفاءة.", "الشغف والإلهام.", "القيم والعلاقات.", "المنطق والبيانات."],
-      },
-      {
-        question: "كيف تستعيد طاقتك بعد يوم طويل؟",
-        options: [
-          "النشاط البدني أو المنافسة.",
-          "التواصل الاجتماعي أو الترفيه.",
-          "وقت هادئ مع الأحباء.",
-          "القراءة أو الأنشطة الفردية.",
-        ],
-      },
-      {
-        question: "ما هو نهجك تجاه المخاطر؟",
-        options: [
-          "أخاطر بمخاطر محسوبة لتحقيق مكافآت كبيرة.",
-          "أحتضن عدم اليقين كمغامرة.",
-          "أفضل السلامة والاستقرار.",
-          "أحلل بدقة قبل اتخاذ القرار.",
-        ],
-      },
-      {
-        question: "كيف تظهر تقديرك؟",
-        options: [
-          "من خلال الإنجازات والنتائج.",
-          "بحماس واحتفال.",
-          "من خلال الإيماءات الشخصية والرعاية.",
-          "بأفعال مدروسة وذات مغزى.",
-        ],
-      },
-      {
-        question: "ما هي عطلتك المثالية؟",
-        options: [
-          "رياضات المغامرة أو الأنشطة الصعبة.",
-          "التجمعات الاجتماعية والتجارب الجديدة.",
-          "الاسترخاء الهادئ مع العائلة.",
-          "الاستكشاف الثقافي والتعلم.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع الانقطاعات؟",
-        options: [
-          "أشعر بالإحباط وأعيد التوجيه بسرعة.",
-          "أرحب بالاستراحة وأتحدث.",
-          "أستمع بلطف وأساعد إذا لزم الأمر.",
-          "أفضل إنهاء مهمتي الحالية أولاً.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في الاجتماعات؟",
-        options: [
-          "اجعلها قصيرة ومركزة على الإجراءات.",
-          "شجع العصف الذهني والأفكار.",
-          "تأكد من أن للجميع صوتاً.",
-          "اتبع جدول الأعمال ووثق القرارات.",
-        ],
-      },
-      {
-        question: "كيف تقدم الملاحظات؟",
-        options: ["مباشرة ومركزة على النتائج.", "إيجابية ومشجعة.", "لطيفة وداعمة.", "محددة وبناءة."],
-      },
-      {
-        question: "ما الذي يحفز مشاركتك في الفريق؟",
-        options: [
-          "القيادة وتحقيق النتائج.",
-          "إلهام الآخرين وتنشيطهم.",
-          "دعم ومساعدة الزملاء.",
-          "المساهمة بالخبرة والتحليل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع المهام الروتينية؟",
-        options: [
-          "أجد طرقاً لإنجازها بشكل أسرع.",
-          "أجعلها ممتعة أو أفوضها.",
-          "أقوم بها بثبات وموثوقية.",
-          "أقوم بتنظيمها وتحسينها بشكل منهجي.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في بناء العلاقات؟",
-        options: [
-          "استراتيجي وموجه نحو الهدف.",
-          "طبيعي ومركز على العلاقات.",
-          "أصيل وبناء للثقة.",
-          "مهني ومشارك للمعرفة.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع الأخطاء؟",
-        options: [
-          "أصلحها بسرعة وأمضي قدماً.",
-          "أتعلم منها وأظل إيجابياً.",
-          "أتأمل فيها وأطلب الدعم.",
-          "أحللها لمنع تكرارها.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في العرض التقديمي؟",
-        options: ["واثق ومقنع.", "جذاب وتفاعلي.", "دافئ وشامل.", "مفصل وغني بالمعلومات."],
-      },
-      {
-        question: "كيف تحدد أولويات المهام؟",
-        options: [
-          "حسب التأثير والإلحاح.",
-          "حسب الاهتمام ومستوى الطاقة.",
-          "حسب احتياجات الآخرين والمواعيد النهائية.",
-          "حسب التسلسل المنطقي والأهمية.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في حل المشكلات؟",
-        options: [
-          "أتولى المسؤولية وأنفذ الحلول.",
-          "أعصف ذهنياً ببدائل إبداعية.",
-          "أسعى للحصول على المدخلات وبناء التوافق.",
-          "أبحث وأحلل بشكل منهجي.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع النجاح؟",
-        options: ["أضع أهدافاً أكبر على الفور.", "أحتفل وأشارك الفرحة.", "أشكر من ساعدني.", "أحلل ما نجح بشكل جيد."],
-      },
-      {
-        question: "ما هو أسلوبك في التواصل عبر البريد الإلكتروني؟",
-        options: ["مختصر وموجه نحو الإجراءات.", "ودود ومعبر.", "مهذب ومراعٍ.", "واضح ومفصل."],
-      },
-      {
-        question: "كيف تتعامل مع الحمل الزائد للمعلومات؟",
-        options: [
-          "أركز على الأهم.",
-          "أتصفح بحثاً عن النقاط البارزة المثيرة للاهتمام.",
-          "أعالجها ببطء وبعناية.",
-          "أنظمها وأصنفها بشكل منهجي.",
-        ],
-      },
-      {
-        question: "ما هي فلسفتك في القيادة؟",
-        options: [
-          "القيادة بالقدوة والنتائج.",
-          "إلهام وتحفيز الآخرين.",
-          "خدمة ودعم الفريق.",
-          "التوجيه بالمعرفة والهيكل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع التغيرات التكنولوجية؟",
-        options: [
-          "أتبناها بسرعة إذا كانت تحسن الكفاءة.",
-          "أستكشفها بحماس.",
-          "أنتظر الآخرين لاختبارها أولاً.",
-          "أبحث بدقة قبل التبني.",
-        ],
-      },
-      {
-        question: "ما هو أسلوبك في إدارة الوقت؟",
-        options: [
-          "جدول زمني مزدحم بأولويات واضحة.",
-          "مرن مع مساحة للعفوية.",
-          "متوازن مع وقت للعلاقات.",
-          "منظم مع تخطيط مفصل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع شكاوى العملاء؟",
-        options: [
-          "أحلها بسرعة وكفاءة.",
-          "أستمع بتعاطف وأطمئن.",
-          "أفهم مشاعرهم وأعتذر.",
-          "أبحث في الحقائق وأقدم الحلول.",
-        ],
-      },
-      {
-        question: "ما هو نهجك تجاه الابتكار؟",
-        options: [
-          "تطبيق التحسينات المثبتة.",
-          "التجريب بأفكار إبداعية.",
-          "البناء على الأساليب الناجحة الموجودة.",
-          "البحث والاختبار بشكل منهجي.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع خلافات الفريق؟",
-        options: [
-          "أتخذ القرار النهائي بسرعة.",
-          "أجد حلولاً وسط إبداعية.",
-          "أسهل النقاش حتى التوافق.",
-          "أقدم الحقائق لتوجيه القرار.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في التوازن بين العمل والحياة؟",
-        options: [
-          "أعمل بجد، ألعب بجد.",
-          "أدمج المرح في كل شيء.",
-          "أحافظ على الانسجام بين الاثنين.",
-          "أخطط وأجدول كلاهما بعناية.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع قيود الميزانية؟",
-        options: ["أجد طرقاً لإنجاز المزيد بأقل.", "أكون مبدعاً في البدائل.", "أقبل القيود بلطف.", "أحلل وأحسن الإنفاق."],
-      },
-      {
-        question: "ما هو أسلوبك في التفويض؟",
-        options: [
-          "توقعات واضحة ومواعيد نهائية.",
-          "تشجيع الإبداع والملكية.",
-          "تقديم الدعم والمتابعة.",
-          "تعليمات مفصلة ومراحل.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع مراجعات الأداء؟",
-        options: [
-          "التركيز على النتائج والأهداف.",
-          "الاحتفال بالإنجازات بحماس.",
-          "مناقشة النمو والتطوير.",
-          "تقديم ملاحظات مفصلة ومقاييس.",
-        ],
-      },
-      {
-        question: "ما هو نهجك في إدارة الأزمات؟",
-        options: [
-          "اتخاذ إجراءات حاسمة فورية.",
-          "البقاء إيجابياً وحشد الفريق.",
-          "دعم المتضررين أولاً.",
-          "تقييم الوضع وتخطيط الاستجابة.",
-        ],
-      },
-      {
-        question: "كيف تتعامل مع سياسات مكان العمل؟",
-        options: [
-          "التنقل استراتيجياً لتحقيق الأهداف.",
-          "بناء العلاقات والبقاء إيجابياً.",
-          "تجنب الصراع والبقاء محايداً.",
-          "مراقبة وفهم الديناميكيات.",
-        ],
-      },
-      {
-        question: "ما هو تفضيلك للتدريب والتطوير؟",
-        options: [
-          "المهارات التي تحقق نتائج فورية.",
-          "البرامج التفاعلية والجذابة.",
-          "بيئات التعلم التعاوني.",
-          "Cursos completos y estructurados.",
-        ],
-      },
-      {
-        question: "How do you handle client relationships?",
-        options: [
-          "Focus on delivering value quickly.",
-          "Build rapport and trust.",
-          "Understand their needs deeply.",
-          "Provide expert advice and solutions.",
-        ],
-      },
-      {
-        question: "What's your approach to quality control?",
-        options: [
-          "Efficient processes that ensure results.",
-          "Encourage pride and ownership.",
-          "Collaborative review and improvement.",
-          "Systematic testing and documentation.",
-        ],
-      },
-      {
-        question: "How do you handle remote work?",
-        options: [
-          "Stay focused on deliverables.",
-          "Maintain social connections virtually.",
-          "Create comfortable home environment.",
-          "Establish structured routines.",
-        ],
-      },
-      {
-        question: "What's your long-term career vision?",
-        options: [
-          "Achieve leadership and influence.",
-          "Make a positive impact on others.",
-          "Build meaningful relationships and stability.",
-          "Become an expert in my field.",
-        ],
-      },
-    ],
-  },
-  es: {
-    title: "Test de Personalidad por Colores",
-    subtitle: "¡Descubre tu personalidad a través de los colores! Responde preguntas para revelar tu mezcla única.",
-    selectLanguage: "Seleccionar Idioma",
-    selectQuestionCount: "Elegir Duración del Test",
-    questionCounts: {
-      quick: "Test Rápido",
-      standard: "Test Estándar",
-      detailed: "Test Detallado",
-    },
-    questions: "preguntas",
-    startQuiz: "Comenzar Test",
-    question: "Pregunta",
-    of: "de",
-    complete: "Completo",
-    retakeQuiz: "Repetir Test",
-    downloadData: "Descargar Resultados",
-    colorTraits: {
-      red: {
-        name: "Rojo",
-        emoji: "🔴",
-        traits: "Asertivo, decisivo, terco, líder",
-        shortTrait: "Líder",
-        longDescription:
-          "La personalidad Roja se caracteriza por el liderazgo, la determinación y la ambición. Eres directo, te encanta tener el control y te esfuerzas por lograr tus objetivos de forma rápida y eficiente. A veces puedes ser terco, pero esto refleja tu persistencia para el éxito. Naciste para liderar y tomar decisiones difíciles.",
-      },
-      yellow: {
-        name: "Amarillo",
-        emoji: "🟡",
-        traits: "Juguetón, optimista, espontáneo, emocional",
-        shortTrait: "Optimista",
-        longDescription:
-          "La personalidad Amarilla se caracteriza por la alegría, el optimismo y la espontaneidad. Eres sociable, te encanta ser el centro de atención y disfrutas de nuevas experiencias. Puedes ser emocional e impulsivo, pero tu energía positiva es contagiosa. Traes alegría e inspiración a quienes te rodean.",
-      },
-      green: {
-        name: "Verde",
-        emoji: "🟢",
-        traits: "Pacífico, empático, oyente, flexible",
-        shortTrait: "Pacificador",
-        longDescription:
-          "La personalidad Verde se caracteriza por la paz, la empatía y la flexibilidad. Eres tranquilo, amas la armonía y buscas ayudar a los demás. Puedes dudar al tomar grandes decisiones, pero eres un excelente oyente y un gran apoyo. Construyes puentes de confianza y comprensión.",
-      },
-      blue: {
-        name: "Azul",
-        emoji: "🔵",
-        traits: "Analítico, organizado, lógico, detallista",
-        shortTrait: "Analista",
-        longDescription:
-          "La personalidad Azul se caracteriza por el análisis, la organización y la lógica. Eres preciso, te encantan los hechos y buscas una comprensión profunda de todo. Puedes ser perfeccionista y pensar demasiado, pero tu precisión y metodología son invaluables. Buscas la perfección y aportas claridad.",
-      },
-    },
-    results: {
-      title: "Tus Resultados de Personalidad por Colores",
-      subtitle: "¡Descubre tu mezcla única de personalidad!",
-      analysis: "Tu Análisis de Personalidad",
-      careers: "Sugerencias de Carrera",
-      careerIntro: "Basado en tu personalidad {color}, estas carreras podrían ser perfectas:",
-      moreAboutColors: "Más sobre tus colores",
-    },
-    personalityAnalysis: {
-      primary: "Eres principalmente una personalidad {color} ({percentage}%), lo que significa que eres {traits}.",
-      secondary: "Tus rasgos secundarios {color} ({percentage}%) añaden {traits} a tu mezcla de personalidad.",
-      focused:
-        "Tienes un tipo de personalidad fuerte y enfocado con preferencias claras y patrones de comportamiento consistentes.",
-    },
-    careerSuggestions: {
-      red: ["CEO/Ejecutivo", "Gerente de Ventas", "Emprendedor", "Gerente de Proyecto", "Oficial Militar"],
-      yellow: [
-        "Especialista en Marketing",
-        "Organizador de Eventos",
-        "Maestro",
-        "Gerente de Redes Sociales",
-        "Artista",
-      ],
-      green: ["Consejero", "Especialista en RRHH", "Trabajador Social", "Enfermero", "Mediador"],
-      blue: ["Analista de Datos", "Ingeniero", "Contador", "Investigador", "Desarrollador de Software"],
-    },
-    questionsData: [
-      {
-        question: "¿Cómo reaccionas cuando alguien está fuertemente en desacuerdo con tu opinión?",
-        options: [
-          "Defiendo mi postura hasta el final.",
-          "Cambio el tema para evitar tensión.",
-          "Escucho y trato de encontrar puntos en común.",
-          "Analizo la lógica de ambos lados antes de responder.",
-        ],
-      },
-      {
-        question: "¿Cómo sueles abordar nuevas tareas?",
-        options: [
-          "Salto inmediatamente y tomo el control.",
-          "Me emociono y me gusta experimentar.",
-          "Espero a que alguien me guíe y ayude.",
-          "Planeo todo cuidadosamente antes de empezar.",
-        ],
-      },
-      {
-        question: "¿Cómo te describirían tus amigos?",
-        options: [
-          "Directo y determinado.",
-          "Divertido y enérgico.",
-          "Tranquilo y amable.",
-          "Inteligente y estructurado.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu estilo para tomar decisiones?",
-        options: [
-          "Rápido y confiado.",
-          "Basado en mi estado de ánimo e intuición.",
-          "Después de consultar a otros.",
-          "A través de pensamiento profundo y análisis.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas las críticas?",
-        options: [
-          "Me resisto y discuto.",
-          "Me río o cambio el tema.",
-          "Lo absorbo silenciosamente y reflexiono.",
-          "Analizo los comentarios lógicamente.",
-        ],
-      },
-      {
-        question: "En un proyecto grupal, ¿cuál es tu rol usual?",
-        options: [
-          "Líder y tomador de decisiones.",
-          "Generador de ideas y motivador.",
-          "Compañero de apoyo y oyente.",
-          "Planificador y organizador.",
-        ],
-      },
-      {
-        question: "¿Cómo pasas tu tiempo libre?",
-        options: [
-          "Compitiendo en juegos o desafíos.",
-          "Pasando el rato o probando algo nuevo.",
-          "Relajándome con familia o amigos cercanos.",
-          "Leyendo, investigando u organizando.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu reacción al cambio repentino?",
-        options: [
-          "Tomo control y me adapto rápido.",
-          "Me emociono - ¡amo las sorpresas!",
-          "Prefiero estabilidad y me siento inquieto.",
-          "Necesito estudiar el cambio primero.",
-        ],
-      },
-      {
-        question: "Cuando estás bajo estrés, ¿cómo actúas?",
-        options: [
-          "Me vuelvo impaciente y controlador.",
-          "Trato de distraerme con diversión.",
-          "Evito el conflicto y me quedo callado.",
-          "Pienso demasiado y me retiro hacia adentro.",
-        ],
-      },
-      {
-        question: "¿Qué te motiva más?",
-        options: ["Ganar y lograr.", "Emoción y disfrute.", "Armonía y apreciación.", "Entendimiento y claridad."],
-      },
-      {
-        question: "¿Cómo prefieres comunicarte?",
-        options: ["Directo y al grano.", "Entusiasta y expresivo.", "Amable y considerado.", "Preciso y factual."],
-      },
-      {
-        question: "¿Cuál es tu entorno de trabajo ideal?",
-        options: [
-          "De ritmo rápido y competitivo.",
-          "Creativo y colaborativo.",
-          "De apoyo y armonioso.",
-          "Tranquilo y organizado.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas los plazos?",
-        options: [
-          "Trabajo mejor bajo presión.",
-          "Me energiza la prisa.",
-          "Prefiero un progreso constante.",
-          "Planifico con anticipación para evitar el estrés.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu estilo de aprendizaje?",
-        options: [
-          "Aprender haciendo y liderando.",
-          "Interactivo y práctico.",
-          "Colaborativo y de apoyo.",
-          "Investigación y estudio sistemático.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas los conflictos?",
-        options: [
-          "Lo enfrento directamente.",
-          "Intento aligerar el ambiente.",
-          "Busco el compromiso y la comprensión.",
-          "Analizo la causa raíz.",
-        ],
-      },
-      {
-        question: "¿Qué impulsa tus decisiones?",
-        options: ["Resultados y eficiencia.", "Pasión e inspiración.", "Valores y relaciones.", "Lógica y datos."],
-      },
-      {
-        question: "¿Cómo te recargas después de un largo día?",
-        options: [
-          "Actividad física o competición.",
-          "Socializar o entretenimiento.",
-          "Tiempo tranquilo con seres queridos.",
-          "Leer o actividades solitarias.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu enfoque ante el riesgo?",
-        options: [
-          "Asumo riesgos calculados para grandes recompensas.",
-          "Abrazo la incertidumbre como una aventura.",
-          "Prefiero la seguridad y la estabilidad.",
-          "Analizo a fondo antes de decidir.",
-        ],
-      },
-      {
-        question: "¿Cómo muestras aprecio?",
-        options: [
-          "A través de logros y resultados.",
-          "Con entusiasmo y celebración.",
-          "A través de gestos personales y cuidado.",
-          "Con acciones reflexivas y significativas.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu vacación ideal?",
-        options: [
-          "Deportes de aventura o actividades desafiantes.",
-          "Reuniones sociales y nuevas experiencias.",
-          "Retiro tranquilo con la familia.",
-          "Exploración cultural y aprendizaje.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas las interrupciones?",
-        options: [
-          "Me frustro y redirijo rápidamente.",
-          "Doy la bienvenida a la pausa y charlo.",
-          "Escucho cortésmente y ayudo si es necesario.",
-          "Prefiero terminar mi tarea actual primero.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu estilo de reunión?",
-        options: [
-          "Que sea breve y centrada en la acción.",
-          "Fomentar la lluvia de ideas y las ideas.",
-          "Asegurarse de que todos tengan voz.",
-          "Seguir la agenda y documentar las decisiones.",
-        ],
-      },
-      {
-        question: "¿Cómo das retroalimentación?",
-        options: [
-          "Directa y centrada en los resultados.",
-          "Positiva y alentadora.",
-          "Amable y de apoyo.",
-          "Específica y constructiva.",
-        ],
-      },
-      {
-        question: "¿Qué motiva tu participación en el equipo?",
-        options: [
-          "Liderar e impulsar resultados.",
-          "Inspirar y energizar a otros.",
-          "Apoyar y ayudar a los compañeros de equipo.",
-          "Contribuir con experiencia y análisis.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas las tareas rutinarias?",
-        options: [
-          "Encuentro formas de hacerlas más rápido.",
-          "Las hago divertidas o las delego.",
-          "Las hago de forma constante y fiable.",
-          "Las sistematizo y optimizo.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu enfoque de networking?",
-        options: [
-          "Estratégico y orientado a objetivos.",
-          "Natural y centrado en las relaciones.",
-          "Genuino y que genera confianza.",
-          "Profesional y de intercambio de conocimientos.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas los errores?",
-        options: [
-          "Los corrijo rápidamente y sigo adelante.",
-          "Aprendo de ellos y me mantengo positivo.",
-          "Reflexiono sobre ellos y busco apoyo.",
-          "Los analizo para evitar que se repitan.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu estilo de presentación?",
-        options: [
-          "Seguro y persuasivo.",
-          "Atractivo e interactivo.",
-          "Cálido e inclusivo.",
-          "Detallado e informativo.",
-        ],
-      },
-      {
-        question: "¿Cómo priorizas las tareas?",
-        options: [
-          "Por impacto y urgencia.",
-          "Por interés y nivel de energía.",
-          "Por las necesidades y plazos de los demás.",
-          "Por secuencia lógica e importancia.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu enfoque para la resolución de problemas?",
-        options: [
-          "Tomo el control e implemento soluciones.",
-          "Hago una lluvia de ideas de alternativas creativas.",
-          "Busco aportes y construyo consenso.",
-          "Investigo y analizo sistemáticamente.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas el éxito?",
-        options: [
-          "Establezco metas más grandes inmediatamente.",
-          "Celebro y comparto la alegría.",
-          "Agradezco a quienes me ayudaron.",
-          "Analizo lo que funcionó bien.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu estilo de comunicación por correo electrónico?",
-        options: [
-          "Breve y orientada a la acción.",
-          "Amigable y expresiva.",
-          "Educada y considerada.",
-          "Clara y detallada.",
-        ],
-      },
-      {
-        question: "¿Cómo manejas la sobrecarga de información?",
-        options: [
-          "Me concentro en lo más importante.",
-          "Busco los puntos destacados interesantes.",
-          "Lo proceso lenta y cuidadosamente.",
-          "Lo organizo y clasifico sistemáticamente.",
-        ],
-      },
-      {
-        question: "¿Cuál es tu filosofía de liderazgo?",
-        options: [
-          "Liderar con el ejemplo y los resultados.",
-          "Inspirar y motivar a otros.",
-          "Servir y apoyar al equipo.",
-          "Guiar con conocimiento y estructura.",
-        ],
-      },
-      {
-        question: "How do you handle technology changes?",
-        options: [
-          "Adopt quickly if it improves efficiency.",
-          "Explore enthusiastically.",
-          "Wait for others to test it first.",
-          "Research thoroughly before adopting.",
-        ],
-      },
-      {
-        question: "What's your time management style?",
-        options: [
-          "Packed schedule with clear priorities.",
-          "Flexible with room for spontaneity.",
-          "Balanced with time for relationships.",
-          "Structured with detailed planning.",
-        ],
-      },
-      {
-        question: "How do you handle customer complaints?",
-        options: [
-          "Resolve quickly and efficiently.",
-          "Listen empathetically and reassure.",
-          "Understand their feelings and apologize.",
-          "Investigate facts and provide solutions.",
-        ],
-      },
-      {
-        question: "What's your approach to innovation?",
-        options: [
-          "Implement proven improvements.",
-          "Experiment with creative ideas.",
-          "Build on existing successful methods.",
-          "Research and test systematically.",
-        ],
-      },
-      {
-        question: "How do you handle team disagreements?",
-        options: [
-          "Make the final decision quickly.",
-          "Find creative compromises.",
-          "Facilitate discussion until consensus.",
-          "Present facts to guide decision.",
-        ],
-      },
-      {
-        question: "What's your work-life balance approach?",
-        options: [
-          "Work hard, play hard.",
-          "Integrate fun into everything.",
-          "Maintain harmony between both.",
-          "Plan and schedule both carefully.",
-        ],
-      },
-      {
-        question: "How do you handle budget constraints?",
-        options: [
-          "Find ways to do more with less.",
-          "Get creative with alternatives.",
-          "Accept limitations gracefully.",
+          "Encuentro formas de hacer más con menos.",
+          "Soy creativo con las alternativas.",
+          "Acepto las limitaciones con gracia.",
           "Analizo y optimizo el gasto.",
         ],
       },
       {
-        question: "What's your delegation style?",
+        id: 42,
+        question: "¿Cuál es tu estilo de delegación?",
         options: [
-          "Clear expectations and deadlines.",
-          "Encourage creativity and ownership.",
-          "Provide support and check-ins.",
-          "Detailed instructions and milestones.",
+          "Expectativas y plazos claros.",
+          "Fomentar la creatividad y la propiedad.",
+          "Proporcionar apoyo y seguimiento.",
+          "Instrucciones detalladas e hitos.",
         ],
       },
       {
-        question: "How do you handle performance reviews?",
+        id: 43,
+        question: "¿Cómo manejas las evaluaciones de desempeño?",
         options: [
-          "Focus on results and goals.",
-          "Celebrate achievements enthusiastically.",
-          "Discuss growth and development.",
-          "Provide detailed feedback and metrics.",
+          "Me centro en los resultados y los objetivos.",
+          "Celebro los logros con entusiasmo.",
+          "Discuto el crecimiento y el desarrollo.",
+          "Proporciono retroalimentación detallada y métricas.",
         ],
       },
       {
-        question: "What's your crisis management approach?",
+        id: 44,
+        question: "¿Cuál es tu enfoque de gestión de crisis?",
         options: [
-          "Take immediate decisive action.",
-          "Stay positive and rally the team.",
-          "Support affected people first.",
-          "Assess situation and plan response.",
+          "Tomo medidas decisivas inmediatas.",
+          "Me mantengo positivo y animo al equipo.",
+          "Apoyo primero a las personas afectadas.",
+          "Evalúo la situación y planifico la respuesta.",
         ],
       },
       {
-        question: "How do you handle workplace politics?",
+        id: 45,
+        question: "¿Cómo manejas la política en el lugar de trabajo?",
         options: [
-          "Navigate strategically to achieve goals.",
-          "Build relationships and stay positive.",
-          "Avoid conflict and stay neutral.",
-          "Observe and understand the dynamics.",
+          "Navego estratégicamente para lograr objetivos.",
+          "Construyo relaciones y me mantengo positivo.",
+          "Evito conflictos y me mantengo neutral.",
+          "Observo y comprendo la dinámica.",
         ],
       },
       {
-        question: "What's your training and development preference?",
+        id: 46,
+        question: "¿Cuál es tu preferencia de formación y desarrollo?",
         options: [
-          "Skills that drive immediate results.",
-          "Interactive and engaging programs.",
-          "Collaborative learning environments.",
-          "Comprehensive and structured courses.",
+          "Habilidades que impulsan resultados inmediatos.",
+          "Programas interactivos y atractivos.",
+          "Entornos de aprendizaje colaborativo.",
+          "Cursos completos y estructurados.",
         ],
       },
       {
-        question: "How do you handle client relationships?",
+        id: 47,
+        question: "¿Cómo manejas las relaciones con los clientes?",
         options: [
-          "Focus on delivering value quickly.",
-          "Build rapport and trust.",
-          "Understand their needs deeply.",
-          "Provide expert advice and solutions.",
+          "Me centro en ofrecer valor rápidamente.",
+          "Construyo una buena relación y confianza.",
+          "Comprendo profundamente sus necesidades.",
+          "Ofrezco asesoramiento y soluciones expertas.",
         ],
       },
       {
-        question: "What's your approach to quality control?",
+        id: 48,
+        question: "¿Cuál es tu enfoque del control de calidad?",
         options: [
-          "Efficient processes that ensure results.",
-          "Encourage pride and ownership.",
-          "Collaborative review and improvement.",
-          "Systematic testing and documentation.",
+          "Procesos eficientes que garantizan resultados.",
+          "Fomentar el orgullo y la propiedad.",
+          "Revisión y mejora colaborativa.",
+          "Pruebas y documentación sistemáticas.",
         ],
       },
       {
-        question: "How do you handle remote work?",
+        id: 49,
+        question: "¿Cómo manejas el trabajo remoto?",
         options: [
-          "Stay focused on deliverables.",
-          "Maintain social connections virtually.",
-          "Create comfortable home environment.",
-          "Establish structured routines.",
+          "Me mantengo centrado en los entregables.",
+          "Mantengo conexiones sociales virtualmente.",
+          { text: "Creo un ambiente hogareño cómodo.", color: "green" },
+          { text: "Establezco rutinas estructuradas.", color: "blue" },
         ],
       },
       {
-        question: "What's your long-term career vision?",
+        id: 50,
+        question: "¿Cuál es tu visión profesional a largo plazo?",
         options: [
-          "Achieve leadership and influence.",
-          "Make a positive impact on others.",
-          "Build meaningful relationships and stability.",
-          "Become an expert in my field.",
+          { text: "Lograr liderazgo e influencia.", color: "red" },
+          { text: "Generar un impacto positivo en los demás.", color: "yellow" },
+          { text: "Construir relaciones significativas y estabilidad.", color: "green" },
+          { text: "Convertirme en un experto en mi campo.", color: "blue" },
         ],
       },
     ],

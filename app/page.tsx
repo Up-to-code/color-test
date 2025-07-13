@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo } from "react"
 import { useQuiz } from "@/hooks/use-quiz"
 import { QuizSetup } from "@/components/quiz-setup"
 import { QuizQuestion } from "@/components/quiz-question"
@@ -8,62 +9,56 @@ import { QuizResults } from "@/components/quiz-results"
 export default function MultilingualColorPersonalityQuiz() {
   const {
     language,
-    setLanguage,
-    questionCount,
-    setQuestionCount,
+    quizLength,
     currentQuestionIndex,
-    answers, // Not directly used here, but part of the hook state
-    showResults,
+    answers,
     scores,
     quizStarted,
+    quizCompleted,
     t,
     isRTL,
-    currentQuestions,
-    handleAnswer,
-    getPercentages,
-    getDominantColors,
-    getPersonalityAnalysis,
-    handleDownloadData,
-    resetQuiz,
+    currentQuestion,
+    totalQuestions,
     startQuiz,
+    handleAnswer,
+    resetQuiz,
+    setLanguage,
   } = useQuiz()
 
+  const dominantColor = useMemo(() => {
+    let maxScore = -1
+    let dominant: "red" | "yellow" | "green" | "blue" = "red" // Default to red
+
+    for (const color in scores) {
+      if (scores[color as keyof typeof scores] > maxScore) {
+        maxScore = scores[color as keyof typeof scores]
+        dominant = color as "red" | "yellow" | "green" | "blue"
+      }
+    }
+    return dominant
+  }, [scores])
+
   if (!quizStarted) {
+    return <QuizSetup startQuiz={startQuiz} setLanguage={setLanguage} language={language} t={t} />
+  }
+
+  if (quizStarted && !quizCompleted && currentQuestion) {
     return (
-      <QuizSetup
+      <QuizQuestion
+        currentQuestion={currentQuestion}
+        currentQuestionIndex={currentQuestionIndex}
+        totalQuestions={totalQuestions}
+        handleAnswer={handleAnswer}
         language={language}
-        setLanguage={setLanguage}
-        questionCount={questionCount}
-        setQuestionCount={setQuestionCount}
-        startQuiz={startQuiz}
         isRTL={isRTL}
+        t={t}
       />
     )
   }
 
-  if (showResults) {
-    return (
-      <QuizResults
-        scores={scores}
-        language={language}
-        isRTL={isRTL}
-        getPercentages={getPercentages}
-        getDominantColors={getDominantColors}
-        getPersonalityAnalysis={getPersonalityAnalysis}
-        handleDownloadData={handleDownloadData}
-        resetQuiz={resetQuiz}
-      />
-    )
+  if (quizCompleted) {
+    return <QuizResults scores={scores} dominantColor={dominantColor} resetQuiz={resetQuiz} language={language} t={t} />
   }
 
-  return (
-    <QuizQuestion
-      currentQuestion={currentQuestions[currentQuestionIndex]}
-      currentQuestionIndex={currentQuestionIndex}
-      totalQuestions={currentQuestions.length}
-      handleAnswer={handleAnswer}
-      language={language}
-      isRTL={isRTL}
-    />
-  )
+  return null // Should not happen if logic is correct
 }
